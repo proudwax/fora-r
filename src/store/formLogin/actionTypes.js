@@ -1,1 +1,1 @@
-// export const TOPICS_FETCHED = 'topics.TOPICS_FETCHED';
+export const SET_NICKNAME = 'loginForm.SET_NICKNAME';

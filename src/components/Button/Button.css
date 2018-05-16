@@ -10,6 +10,14 @@
     background: rgba(0,0,0,.2);
     text-align: center;
     white-space: nowrap;
+
+    padding: 0;
+    margin: 0;
+}
+
+.Button:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, .3);
 }
 
 .Button:before {
@@ -21,4 +29,13 @@
     content: '';
     border-radius: 2px;
     background: #fff;
+}
+
+.Button-Text {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    margin: 0 13px;
 }

@@ -1,5 +1,5 @@
-import login from './login/reducer';
+import formLogin from './formLogin/reducer';
 
 export {
-    login
+    formLogin
 };

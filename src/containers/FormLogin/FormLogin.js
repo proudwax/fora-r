@@ -25,7 +25,7 @@ class FormLogin extends React.Component {
         const { nickName, isLogin, setNickName } = this.props;
 
         if (isLogin) {
-            return <Redirect to={`/game/${Date.now()}`} />;
+            return <Redirect to={`/game/${Date.now()}/`} />;
         }
 
         return (
@@ -56,7 +56,7 @@ class FormLogin extends React.Component {
 // Это значит, что представление должно улавливать изменения той части стейта, от которого оно зависит. 
 // Это делается с помощью mapStateToProps.
 const mapStateToProps = (state) => {
-     return {
+    return {
         nickName: userSelectors.getNickName(state),
         isLogin: formLoginSelectors.isLogin(state)
     };

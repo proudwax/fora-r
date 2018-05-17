@@ -3,6 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import * as userActions from '../../store/user/actions';
+import * as userSelectors from '../../store/user/reducer';
+
 import * as formLoginActions from '../../store/formLogin/actions';
 import * as formLoginSelectors from '../../store/formLogin/reducer';
 
@@ -14,16 +17,20 @@ class FormLogin extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log(this.props);
+        this.props.toggleLogin(!this.props.isLogin);
         // нужно добавить что-то типо isLogin для -> return <Redirect to='/game' />;
     };
 
     render() {
-        const { nickName, setNickName } = this.props;
+        const { nickName, isLogin, setNickName } = this.props;
+
+        if (isLogin) {
+            return <Redirect to={`/game/${Date.now()}`} />;
+        }
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <h2>Where are my topics?</h2>
+                <h2>Enter your nick name</h2>
                 <FormField>
                     <input
                         onChange={(event) => { setNickName(event.target.value) }}
@@ -31,6 +38,7 @@ class FormLogin extends React.Component {
                         name='Login'
                         placeholder='Your nickname'
                         value={nickName}
+                        autoComplete='off'
                     />
                 </FormField>
                 <button
@@ -48,8 +56,9 @@ class FormLogin extends React.Component {
 // Это значит, что представление должно улавливать изменения той части стейта, от которого оно зависит. 
 // Это делается с помощью mapStateToProps.
 const mapStateToProps = (state) => {
-    return {
-        nickName: formLoginSelectors.getNickName(state)
+     return {
+        nickName: userSelectors.getNickName(state),
+        isLogin: formLoginSelectors.isLogin(state)
     };
 }
 
@@ -58,7 +67,8 @@ const mapStateToProps = (state) => {
 // который вы можете вставить в представление.
 const mapDispatchToProps = (dispatch) => {
     return {
-        setNickName: bindActionCreators(formLoginActions.setNickName, dispatch)
+        setNickName: bindActionCreators(userActions.setNickName, dispatch),
+        toggleLogin: bindActionCreators(formLoginActions.toggleLogin, dispatch)
     }
 };
 

@@ -6,10 +6,3 @@ export function setNickName(nickName) {
         payload: nickName
     };
 }
-
-export function toggleLogin(toggleLogin) {
-    return {
-        type: types.IS_LOG_IN,
-        payload: toggleLogin
-    };
-}

@@ -12,16 +12,21 @@ import GameChoise from '../../components/GameChoise/GameChoise';
 import GameScore from '../../components/GameScore/GameScore';
 import GameWaiting from '../../components/GameWaiting/GameWaiting';
 
-const Game = ({nickName, players, listScore}) => {
-    // listScore.length - уже прошедших игр
-    // round - текущий
-    let round = listScore.length + 1; 
-    return (<div>
-        <GameScore players={players} listScore={listScore}/>
-        <GameChoise round={round}/>
-        <GameWaiting />
-    </div>);
+class Game extends React.Component {
+    render() {
+        const { players, listScore, onAddScore } = this.props;
+        // listScore.length - уже прошедших игр
+        // round - текущий
+        const round = listScore.length + 1;
+
+        return (<div>
+            <GameScore players={players} listScore={listScore} />
+            <GameChoise round={round} addScore={onAddScore} />
+            <GameWaiting />
+        </div>);
+    }
 }
+
 
 const mapStateToProps = (state) => {
     return {
@@ -33,7 +38,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addScore: bindActionCreators(gameActions.addListScore, dispatch)
+        onAddScore: bindActionCreators(gameActions.addListScore, dispatch)
     }
 };
 

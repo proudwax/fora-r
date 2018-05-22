@@ -1,0 +1,1 @@
+export const ADD_SCORE = 'game.ADD_SCORE';

@@ -1,7 +1,40 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-const Game = (props) => {
-    return <div>Game is beginning</div>
+import * as userSelectors from '../../store/user/reducer';
+
+import * as gameActions from '../../store/game/actions';
+import * as gameSelectors from '../../store/game/reducer';
+
+
+import GameChoise from '../../components/GameChoise/GameChoise';
+import GameScore from '../../components/GameScore/GameScore';
+import GameWaiting from '../../components/GameWaiting/GameWaiting';
+
+const Game = ({nickName, players, listScore}) => {
+    // listScore.length - уже прошедших игр
+    // round - текущий
+    let round = listScore.length + 1; 
+    return (<div>
+        <GameScore players={players} listScore={listScore}/>
+        <GameChoise round={round}/>
+        <GameWaiting />
+    </div>);
 }
 
-export default Game;
+const mapStateToProps = (state) => {
+    return {
+        nickName: userSelectors.getNickName(state),
+        players: gameSelectors.getNames(state),
+        listScore: gameSelectors.getListScore(state)
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addScore: bindActionCreators(gameActions.addListScore, dispatch)
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

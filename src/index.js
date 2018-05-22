@@ -7,11 +7,13 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 import App from './App';
 import Foo from './Foo';
 import Bar from './Bar';
+import Game from './containers/Game/Game';
+
 import './index.css';
 
 // import registerServiceWorker from './registerServiceWorker';
@@ -19,11 +21,11 @@ import './index.css';
 import * as reducers from './store/reducers';
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
+const router = routerMiddleware(history);
 
-const store = createStore(combineReducers({ ...reducers, route: routerReducer }), applyMiddleware(middleware));
+const store = createStore(combineReducers({ ...reducers, route: routerReducer }), applyMiddleware(router, thunk));
 
-console.log(store.getState());
+// console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
@@ -32,6 +34,8 @@ ReactDOM.render(
                 <Route exact path='/' component={App} />
                 <Route path='/foo' component={Foo} />
                 <Route path='/bar' component={Bar} />
+                <Route exact path='/game' component={Game} />
+                <Route path='/game/:id' component={Game} />
             </Fragment>
         </ConnectedRouter>
     </Provider>,

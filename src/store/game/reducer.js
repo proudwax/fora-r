@@ -10,13 +10,19 @@ const initialState = {
         [0, 0],
         [0, 1],
         [1, 0]
-    ]
+    ],
+    opponentStatus: 'pending' // pending || done
 };
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
         case types.ADD_SCORE:
             return { ...state, score: state.score.push(action.payload) };
+        case types.OPPONENT_PENDING:
+            return { ...state, opponentStatus: 'pending' };
+        case types.OPPONENT_DONE:
+            return { ...state, opponentStatus: 'done' };    
+
         default:
             return state;
     }
@@ -30,4 +36,8 @@ export const getNames = (state) => {
 
 export const getListScore = (state) => {
     return state.game.listScore;
+}
+
+export const getOpponentStatus = (state) => {
+    return state.game.opponentStatus;
 }

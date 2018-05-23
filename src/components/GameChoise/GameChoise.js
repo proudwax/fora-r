@@ -2,30 +2,55 @@ import React from 'react';
 
 import './GameChoise.css';
 
+const radioInputs = [
+    { type: 'radio', name: 'choise', value: 1, label: '1' },
+    { type: 'radio', name: 'choise', value: 2, label: '2' },
+    { type: 'radio', name: 'choise', value: 3, label: '3' },
+    { type: 'radio', name: 'choise', value: 4, label: '4' },
+    { type: 'radio', name: 'choise', value: 5, label: '5' },
+];
+
 class GameChoise extends React.Component {
     constructor(props) {
         super(props);
+
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.createRadioInputs = this.createRadioInputs.bind(this);
+    }
+
+    // создаем input radio из array
+    createRadioInputs = (radioInputs) => (onChange) => {
+        return radioInputs.map((item, index) => <label key={index}>
+            {item.label}
+            <input 
+                type={item.type} 
+                name={item.name} 
+                value={item.value} 
+                onChange={onChange}
+            />
+        </label>);
+    }
+
+    handleChange(e) {
+        this.radioChecked = e.target.value;
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        console.log(formData.getAll());
+
+        console.log(this.radioChecked);
         // this.props.addScore();
     }
 
     render() {
-        const { Round } = this.props;
+        const { round } = this.props;
+
         return (<div>
-            <h1>Rounr: {Round}</h1>
+            <h1>Rounr: {round}</h1>
             <h2>GameChoise</h2>
             <form onSubmit={this.handleSubmit}>
-                <label>1<input type='radio' name='choise' value='1' /></label>
-                <label>2<input type='radio' name='choise' value='2' /></label>
-                <label>3<input type='radio' name='choise' value='3' /></label>
-                <label>4<input type='radio' name='choise' value='4' /></label>
-                <label>5<input type='radio' name='choise' value='5' /></label>
+                { this.createRadioInputs(radioInputs)(this.handleChange) }
                 <button type='submit'>Send</button>
             </form>
         </div>);

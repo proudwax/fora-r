@@ -13,24 +13,31 @@ import FormField from '../../components/FormField/FormField';
 
 
 class FormLogin extends React.Component {
-
     handleSubmit = (event) => {
         event.preventDefault();
 
         this.props.toggleLogin(!this.props.isLogin);
+        userActions.sendNickName(this.props.nickName);
         // нужно добавить что-то типо isLogin для -> return <Redirect to='/game' />;
     };
 
     render() {
-        const { nickName, isLogin, setNickName } = this.props;
+        const { nickName, isLogin, setNickName, roomID, getRoomID } = this.props;
+
+        
+        if (!roomID) {
+            getRoomID();
+            return <div>Loading...</div>
+        }
 
         if (isLogin) {
-            return <Redirect to={`/game/${Date.now()}/`} />;
+            return <Redirect to={`/game/${roomID}`} />;
         }
+
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <h2>Enter your nick name</h2>
+                <h2>Enter your nick name {}</h2>
                 <FormField>
                     <input
                         onChange={(event) => { setNickName(event.target.value) }}
@@ -58,6 +65,7 @@ class FormLogin extends React.Component {
 const mapStateToProps = (state) => {
     return {
         nickName: userSelectors.getNickName(state),
+        roomID: userSelectors.getRoomID(state),
         isLogin: formLoginSelectors.isLogin(state)
     };
 }
@@ -68,7 +76,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setNickName: bindActionCreators(userActions.setNickName, dispatch),
-        toggleLogin: bindActionCreators(formLoginActions.toggleLogin, dispatch)
+        toggleLogin: bindActionCreators(formLoginActions.toggleLogin, dispatch),
+        getRoomID: bindActionCreators(userActions.getRoomID, dispatch)
     }
 };
 

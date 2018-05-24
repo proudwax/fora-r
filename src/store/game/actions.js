@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
-import openSocket from 'socket.io-client';
+import io from 'socket.io-client';
 
-const socket = openSocket('http://localhost:8000');
+const socket = io('http://localhost:8000');
 
 export function addListScore(score) {
     return {

@@ -25,13 +25,11 @@ const router = routerMiddleware(history);
 
 const store = createStore(combineReducers({ ...reducers, route: routerReducer }), applyMiddleware(router, thunk));
 
-// console.log(store.getState());
-
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Fragment> {/* Убрать обертку div */}
-                <Route exact path='/' component={App} />
+                <Route path='/' component={App} />
                 <Route path='/foo' component={Foo} />
                 <Route path='/bar' component={Bar} />
                 <Route exact path='/game' component={Game} />

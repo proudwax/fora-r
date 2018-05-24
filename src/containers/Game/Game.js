@@ -14,13 +14,13 @@ import GameWaiting from '../../components/GameWaiting/GameWaiting';
 
 class Game extends React.Component {
     
-    listenStatus() {
-        gameActions.listenOpponentStatus((err, timestamp) => console.log(timestamp));
-    }
+    // listenStatus() {
+    //     gameActions.listenOpponentStatus((err, timestamp) => console.log(timestamp));
+    // }
 
-    componentDidMount() {
-        this.listenStatus();
-    }
+    // componentDidMount() {
+    //     this.listenStatus();
+    // }
 
     render() {
         const { players, listScore, onAddScore } = this.props;

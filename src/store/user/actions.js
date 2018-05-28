@@ -14,6 +14,13 @@ export const sendNickName = (nickName) => {
     socket.emit('setNickName', nickName);
 }
 
+export const setRole = (role) => {
+    return {
+        type: types.SET_ROLE,
+        payload: role
+    }
+}
+
 export function setRoomID(roomID) {
     return {
         type: types.SET_ROOM_ID,

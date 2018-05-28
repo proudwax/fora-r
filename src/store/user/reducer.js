@@ -2,7 +2,8 @@ import * as types from './actionTypes';
 
 const initialState = {
     nickName: '',
-    roomID: null
+    roomID: null,
+    role: 'viewer'
 };
 
 export default function reduce(state = initialState, action = {}) {
@@ -11,6 +12,9 @@ export default function reduce(state = initialState, action = {}) {
             return { ...state, nickName: action.payload };
         case types.SET_ROOM_ID:
             return { ...state, roomID: action.payload };
+        case types.SET_ROLE:
+            return { ...state, role: action.payload };
+
         default:
             return state;
     }
@@ -24,4 +28,8 @@ export function getNickName(state) {
 
 export function getRoomID(state) {
     return state.user.roomID;
+}
+
+export const getRole = (state) => {
+    return state.user.role;
 }

@@ -6,24 +6,25 @@ import { Redirect } from 'react-router-dom';
 import * as userActions from '../../store/user/actions';
 import * as userSelectors from '../../store/user/reducer';
 
-import * as formLoginActions from '../../store/formLogin/actions';
-import * as formLoginSelectors from '../../store/formLogin/reducer';
+import * as loginActions from '../../store/login/actions';
+import * as loginSelectors from '../../store/login/reducer';
 
 import FormField from '../../components/FormField/FormField';
 
 
-class FormLogin extends React.Component {
+class Login extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
         this.props.toggleLogin(!this.props.isLogin);
-        userActions.sendNickName(this.props.nickName);
-        // нужно добавить что-то типо isLogin для -> return <Redirect to='/game' />;
+        // this.props.sendNickName(this.props.nickName);
+        this.props.setNickName(this.props.nickName);
+        this.props.setRole(this.props.role);
     };
 
-    render() {
-        const { nickName, isLogin, setNickName, roomID, getRoomID } = this.props;
 
+    render() {
+        const { nickName, isLogin, role, setNickName, roomID, getRoomID, setRole } = this.props;
         
         if (!roomID) {
             getRoomID();
@@ -48,6 +49,26 @@ class FormLogin extends React.Component {
                         autoComplete='off'
                     />
                 </FormField>
+                <FormField>
+                    <label>Player
+                        <input
+                            onChange={(event) => { setRole(event.target.value) }}
+                            type='radio'
+                            name='Role'
+                            value='player'
+                            checked={role === 'player'}
+                        />
+                    </label>
+                    <label>Viewer
+                        <input
+                            onChange={(event) => { setRole(event.target.value) }}
+                            type='radio'
+                            name='Role'
+                            value='viewer'
+                            checked={role === 'viewer'}
+                        />
+                    </label>
+                </FormField>
                 <button
                     className='Button'
                     text='Send'
@@ -66,7 +87,8 @@ const mapStateToProps = (state) => {
     return {
         nickName: userSelectors.getNickName(state),
         roomID: userSelectors.getRoomID(state),
-        isLogin: formLoginSelectors.isLogin(state)
+        isLogin: loginSelectors.isLogin(state),
+        role: userSelectors.getRole(state)
     };
 }
 
@@ -76,9 +98,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setNickName: bindActionCreators(userActions.setNickName, dispatch),
-        toggleLogin: bindActionCreators(formLoginActions.toggleLogin, dispatch),
-        getRoomID: bindActionCreators(userActions.getRoomID, dispatch)
+        toggleLogin: bindActionCreators(loginActions.toggleLogin, dispatch),
+        getRoomID: bindActionCreators(userActions.getRoomID, dispatch),
+        setRole: bindActionCreators(userActions.setRole, dispatch)
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

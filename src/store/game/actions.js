@@ -3,14 +3,13 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:8000');
 
-export function addListScore(score) {
+export function addListScore(store) {
     return {
         type: types.ADD_SCORE,
-        payload: score
+        payload: store
     };
 }
 
-export function listenOpponentStatus(interval) {
-    socket.on('timer', timestamp => console.log(timestamp));
-    socket.emit('subscribeToTimer', 1000);
+export function listenOpponentStatus(store) {
+    socket.emit('sendStore', store);
 }

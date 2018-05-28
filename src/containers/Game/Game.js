@@ -14,22 +14,25 @@ import GameWaiting from '../../components/GameWaiting/GameWaiting';
 
 class Game extends React.Component {
     
-    // listenStatus() {
-    //     gameActions.listenOpponentStatus((err, timestamp) => console.log(timestamp));
-    // }
+    listenStatus() {
+        gameActions.listenOpponentStatus();
+    }
 
-    // componentDidMount() {
-    //     this.listenStatus();
-    // }
+    componentDidMount() {
+        this.listenStatus(this.props);
+    }
 
     render() {
-        const { players, listScore, onAddScore } = this.props;
+        const { players, role, listScore, onAddScore } = this.props;
         // listScore.length - уже прошедших игр
         // round - текущий
         const round = listScore.length + 1;
 
-
-        console.log();
+        if(role === 'viewer') {
+            return (<div>
+                <GameScore players={players} listScore={listScore} />
+            </div>);
+        }
 
         return (<div>
             <GameScore players={players} listScore={listScore} />
@@ -43,6 +46,7 @@ class Game extends React.Component {
 const mapStateToProps = (state) => {
     return {
         nickName: userSelectors.getNickName(state),
+        role: userSelectors.getRole(state),
         players: gameSelectors.getNames(state),
         listScore: gameSelectors.getListScore(state),
         opponentStatus: gameSelectors.getOpponentStatus(state)

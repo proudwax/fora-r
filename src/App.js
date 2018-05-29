@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as formLoginSelectors from './store/formLogin/reducer';
+import * as loginSelectors from './store/login/reducer';
 
 import FormLogin from './containers/FormLogin/FormLogin';
 import './App.css';
@@ -16,7 +16,7 @@ const App = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        isLogin: formLoginSelectors.isLogin(state)
+        isLogin: loginSelectors.isLogin(state)
     };
 }
 

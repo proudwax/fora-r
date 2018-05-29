@@ -16,5 +16,5 @@ export default function reduce(state = initialState, action = {}) {
 // Селектор  —  это чистая функция, принимающая в качестве аргумента глобальный стейт 
 // и возвращающая его в преобразованном виде.
 export const isLogin = (state) => {
-    return state.formLogin.isLogin;
+    return state.login.isLogin;
 }

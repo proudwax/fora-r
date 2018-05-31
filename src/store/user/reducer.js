@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 
 const initialState = {
+    pointOfEnter: '',
     nickName: '',
     roomID: null,
     role: 'viewer'
@@ -22,14 +23,18 @@ export default function reduce(state = initialState, action = {}) {
 
 // Селектор  —  это чистая функция, принимающая в качестве аргумента глобальный стейт 
 // и возвращающая его в преобразованном виде.
-export function getNickName(state) {
+export const getNickName = (state) => {
     return state.user.nickName;
 }
 
-export function getRoomID(state) {
+export const getRoomID = (state) => {
     return state.user.roomID;
 }
 
 export const getRole = (state) => {
     return state.user.role;
+}
+
+export const getPointOfEnter = (state) => {
+    return state.user.pointOfEnter;
 }

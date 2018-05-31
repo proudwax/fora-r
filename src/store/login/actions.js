@@ -6,3 +6,10 @@ export function toggleLogin(toggleLogin) {
         payload: toggleLogin
     };
 }
+
+export const logined = () => {
+    return {
+        type: types.IS_LOG_IN,
+        payload: true
+    }
+}

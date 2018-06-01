@@ -4,12 +4,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
-import { withRouter } from 'react-router';
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import { Route, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 import thunk from 'redux-thunk';
 
-import App from './containers/App/App';
+import PageHome from './components/PageHome/PageHome';
+import PageGame from './components/PageGame/PageGame';
+import PageLogin from './components/PageLogin/PageLogin';
+import NoMatch from './components/NoMatch/NoMatch';
+
+import GamePrivateRoute from './containers/GamePrivateRoute/GamePrivateRoute';
+
 import './index.css';
 
 // import registerServiceWorker from './registerServiceWorker';
@@ -20,12 +26,16 @@ const history = createHistory();
 const router = routerMiddleware(history);
 
 const store = createStore(combineReducers({ ...reducers, route: routerReducer }), applyMiddleware(router, thunk));
-const AppWithRouter = withRouter(App);
 
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <AppWithRouter/>
+            <Switch>
+                <Route exact path="/" component={PageHome} />
+                <GamePrivateRoute path="/game" component={PageGame} />
+                <Route path="/login" component={PageLogin} />
+                <Route component={NoMatch} />
+            </Switch>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root')

@@ -1,13 +1,13 @@
 import * as types from './actionTypes';
 
 const initialState = {
-    isLogin: false
+    isAuthenticated: false
 };
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
         case types.IS_LOG_IN:
-            return { ...state, isLogin: action.payload };
+            return { ...state, isAuthenticated: action.payload };
         default:
             return state;
     }
@@ -16,5 +16,5 @@ export default function reduce(state = initialState, action = {}) {
 // Селектор  —  это чистая функция, принимающая в качестве аргумента глобальный стейт 
 // и возвращающая его в преобразованном виде.
 export const isLogin = (state) => {
-    return state.login.isLogin;
+    return state.login.isAuthenticated;
 }

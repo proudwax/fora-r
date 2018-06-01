@@ -18,6 +18,7 @@ const App = (props) => {
             <div className='App'>
                 <ul>
                     <li><Link to='/'>Main</Link></li>
+                    <li><Link to='/login'>Login</Link></li>
                     <li><Link to='/game'>Game</Link></li>
                 </ul>
                 <Route exact path='/' component={PageMain} />

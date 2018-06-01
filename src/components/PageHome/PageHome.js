@@ -3,13 +3,13 @@ import React from 'react';
 import Menu from '../Menu/Menu';
 import Grid from '../Grid/Grid';
 
-import './PageLogin.css';
+import './PageHome.css';
 
-const PageLogin = (props) => {
+const PageHome = () => {
     return (<Grid>
         <Menu />
-        <div className='PageLogin'>PageLogin</div>
+        <div className='PageHome'>PageHome</div>
     </Grid>);
 }
 
-export default PageLogin;
+export default PageHome;

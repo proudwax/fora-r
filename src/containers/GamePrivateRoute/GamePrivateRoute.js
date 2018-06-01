@@ -1,32 +1,31 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
 
-import * as userSelectors from '../../store/user/reducer';
+import * as loginSelectors from '../../store/login/reducer';
 
 const GamePrivateRoute = ({ component: Component, ...rest }) => {
-    return (<Route {...rest} render={props =>
-            <Component {...props}/>
+    return (<Route {...rest} render={props => {
+                return rest.isLogin ? (
+                    <Component {...props}/>
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/login",
+                            state: { from: props.location }
+                        }}
+                    />
+                )
+            }
         }
     />);
 };
 
 const mapStateToProps = (state) => {
     return {
-        // nickName: userSelectors.getNickName(state),
-        // role: userSelectors.getRole(state),
-        // players: gameSelectors.getNames(state),
-        // listScore: gameSelectors.getListScore(state),
-        // opponentStatus: gameSelectors.getOpponentStatus(state)
+        isLogin: loginSelectors.isLogin(state)
     };
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // onAddScore: bindActionCreators(gameActions.addListScore, dispatch),
-        // listenOpponentStatus: bindActionCreators(gameActions.listenOpponentStatus, dispatch)
-    }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(GamePrivateRoute);
+export default connect(mapStateToProps, null)(GamePrivateRoute);

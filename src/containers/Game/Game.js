@@ -26,19 +26,21 @@ class Game extends React.Component {
         const { players, role, listScore, onAddScore } = this.props;
         // listScore.length - уже прошедших игр
         // round - текущий
-        const round = listScore.length + 1;
+        // const round = listScore.length + 1;
 
-        if(role === 'viewer') {
-            return (<div>
-                <GameScore players={players} listScore={listScore} />
-            </div>);
-        }
-
-        return (<div>
-            <GameScore players={players} listScore={listScore} />
-            <GameChoise round={round} addScore={onAddScore} />
-            <GameWaiting />
-        </div>);
+        // if(role === 'viewer') {
+        //     return (<div>
+        //         <GameScore players={players} listScore={listScore} />
+        //     </div>);
+        // }
+        return (
+            <div>Game</div>
+        );
+        // return (<div>
+        //     <GameScore players={players} listScore={listScore} />
+        //     <GameChoise round={round} addScore={onAddScore} />
+        //     <GameWaiting />
+        // </div>);
     }
 }
 

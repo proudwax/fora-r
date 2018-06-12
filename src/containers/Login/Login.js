@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import * as userSelectors from '../../store/user/reducer';
 import * as loginActions from '../../store/login/actions';
 
-const Login = (props) => {
-    const { children: Children } = props;
+import FormLogin from '../../containers/FormLogin/FormLogin';
 
+const Login = (props) => {
     return (
         <div className='Login'>
-            {Children}
+            <FormLogin onLogined={props.onLogined} />
         </div>
     );
 }

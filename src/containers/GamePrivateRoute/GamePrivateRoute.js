@@ -6,18 +6,18 @@ import * as loginSelectors from '../../store/login/reducer';
 
 const GamePrivateRoute = ({ component: Component, ...rest }) => {
     return (<Route {...rest} render={props => {
-                return rest.isLogin ? (
-                    <Component {...props}/>
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/login",
-                            state: { from: props.location }
-                        }}
-                    />
-                )
-            }
-        }
+        return rest.isLogin ? (
+            <Component {...props} />
+        ) : (
+                <Redirect
+                    to={{
+                        pathname: '/login',
+                        state: { from: props.location }
+                    }}
+                />
+            )
+    }
+    }
     />);
 };
 

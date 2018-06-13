@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Menu from '../Menu/Menu';
+import Menu from '../../containers/Menu/Menu';
 import Grid from '../Grid/Grid';
 
 import './PageGame.css';

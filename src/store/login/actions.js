@@ -1,13 +1,6 @@
 import * as types from './actionTypes';
 
-export function toggleLogin(toggleLogin) {
-    return {
-        type: types.IS_LOG_IN,
-        payload: toggleLogin
-    };
-}
-
-export const logined = () => {
+export const authenticate = () => {
     return {
         type: types.IS_LOG_IN,
         payload: true

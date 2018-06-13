@@ -1,0 +1,7 @@
+.Menu {
+     grid-area: sidebar;
+}
+
+.active {
+    color: #f00;
+}

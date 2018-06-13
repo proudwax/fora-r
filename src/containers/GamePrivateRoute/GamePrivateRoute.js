@@ -16,7 +16,7 @@ const GamePrivateRoute = ({ component: Component, ...rest }) => {
                     }}
                 />
             )
-    }
+        }
     }
     />);
 };
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, null)(GamePrivateRoute);
+export default connect(mapStateToProps)(GamePrivateRoute);

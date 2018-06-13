@@ -1,39 +1,52 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 
-import * as loginSelectors from '../../store/login/reducer';
 import * as userSelectors from '../../store/user/reducer';
+import * as userActions from '../../store/user/actions';
+
+import PageHome from '../../components/PageHome/PageHome';
+import PageGame from '../../components/PageGame/PageGame';
+import PageLogin from '../../components/PageLogin/PageLogin';
+import NoMatch from '../../components/NoMatch/NoMatch';
 
 import GamePrivateRoute from '../../containers/GamePrivateRoute/GamePrivateRoute';
-import PageLogin from '../../components/PageLogin/PageLogin';
-import PageMain from '../../components/PageMain/PageMain';
-import Game from '../../containers/Game/Game';
+import Spinner from '../../components/Spinner/Spinner';
 
 import './App.css';
 
 const App = (props) => {
-    return (
-        <Router>
-            <div className='App'>
-                <ul>
-                    <li><Link to='/'>Main</Link></li>
-                    <li><Link to='/login'>Login</Link></li>
-                    <li><Link to='/game'>Game</Link></li>
-                </ul>
-                <Route exact path='/' component={PageMain} />
-                <Route path='/login' component={PageLogin} />
-                <GamePrivateRoute path='/game' component={Game} />
-            </div>
-        </Router>
-    );
+    const { roomID, getRoomID, history } = props;
+
+    if (!roomID) {
+        getRoomID();
+        return (<div className='loading'>
+            <Spinner/>
+        </div>);
+    } else {
+        return (<ConnectedRouter history={history}>
+            <Switch>
+                <Route exact path="/" component={PageHome} />
+                <GamePrivateRoute path="/game" component={PageGame} />
+                <Route path="/login" component={PageLogin} />
+                <Route component={NoMatch} />
+            </Switch>
+        </ConnectedRouter>);
+    }
 }
 
 const mapStateToProps = (state) => {
     return {
-        isLogin: loginSelectors.isLogin(state),
-        pointOfEnter: userSelectors.getPointOfEnter(state)
+        roomID: userSelectors.getRoomID(state)
     };
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getRoomID: bindActionCreators(userActions.asyncGetRoomID, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

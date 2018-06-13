@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:8000');
 
-export function setNickName(nickName) {
+export function changeNickName(nickName) {
     return {
         type: types.SET_NICKNAME,
         payload: nickName
@@ -28,11 +28,11 @@ export function setRoomID(roomID) {
     }
 }
 
-export function getRoomID() {
-    return function(dispatch) {
-        socket.emit('firstConnect');
-        socket.on('RoomID', roomID => {
+export const asyncGetRoomID = () => dispatch => {
+    socket.emit('firstConnect');
+    socket.on('RoomID', roomID => {
+        setTimeout(()=> {
             dispatch(setRoomID(Number(roomID)));
-        });
-    }
+        }, 500);
+    });    
 }

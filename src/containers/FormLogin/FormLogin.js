@@ -15,7 +15,7 @@ import FormField from '../../components/FormField/FormField';
 class FormLogin extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.props);
+        
         this.props.onAuthenticate();
     };
 

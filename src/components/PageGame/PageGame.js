@@ -1,14 +1,18 @@
 import React from 'react';
 
-import Menu from '../../containers/Menu/Menu';
+import MenuContainer from '../../containers/MenuContainer/MenuContainer';
+import GameChat from '../../containers/GameChat/GameChat';
 import Grid from '../Grid/Grid';
 
 import './PageGame.css';
 
 const PageGame = () => {
     return (<Grid>
-        <Menu />
-        <div className='PageGame'>PageGame</div>
+        <MenuContainer />
+        <div className='PageGame'>
+            PageGame
+        </div>
+        <GameChat/>
     </Grid>);
 }
 

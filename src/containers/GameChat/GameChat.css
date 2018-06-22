@@ -1,0 +1,8 @@
+.GameChat {
+    grid-area: footer;
+}
+.GameChat-Content {
+    height: 20vh;
+    max-height: 200px;
+    overflow-y: auto;
+}

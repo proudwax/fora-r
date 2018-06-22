@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Menu from '../../containers/Menu/Menu';
+import MenuContainer from '../../containers/MenuContainer/MenuContainer';
 import Grid from '../Grid/Grid';
 import FormLogin from '../../containers/FormLogin/FormLogin';
 
@@ -8,7 +8,7 @@ import './PageLogin.css';
 
 const PageLogin = (rest) => {
     return (<Grid>
-        <Menu />
+        <MenuContainer />
         <div className='PageLogin'>
             <h1>PageLogin</h1>
             <FormLogin {...rest} />

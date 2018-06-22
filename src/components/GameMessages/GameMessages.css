@@ -1,0 +1,11 @@
+.GameMessages {
+    display: flex;
+    flex-flow: column;
+}
+.GameMessage {
+    display: flex;
+}
+.GameMessage-Name {
+    padding-right: 10px;
+    color: rgba(000, 000, 000, .4);
+}

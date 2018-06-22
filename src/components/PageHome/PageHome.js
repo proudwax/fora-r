@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Menu from '../../containers/Menu/Menu';
+import MenuContainer from '../../containers/MenuContainer/MenuContainer';
 import Grid from '../Grid/Grid';
 
 import './PageHome.css';
 
 const PageHome = () => {
     return (<Grid>
-        <Menu />
+        <MenuContainer />
         <div className='PageHome'>PageHome</div>
     </Grid>);
 }

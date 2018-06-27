@@ -1,6 +1,7 @@
-import * as types from './actionTypes';
+import * as types from './types';
 
 const initialState = {
+    gameID: null,
     players: [
         'Player1',
         'Player2'
@@ -21,23 +22,11 @@ export default function reduce(state = initialState, action = {}) {
         case types.OPPONENT_PENDING:
             return { ...state, opponentStatus: 'pending' };
         case types.OPPONENT_DONE:
-            return { ...state, opponentStatus: 'done' };    
+            return { ...state, opponentStatus: 'done' };
+        case types.SET_GAME_ID:
+            return { ...state, gameID: action.payload };    
 
         default:
             return state;
     }
-}
-
-// Селектор  —  это чистая функция, принимающая в качестве аргумента глобальный стейт 
-// и возвращающая его в преобразованном виде.
-export const getNames = (state) => {
-    return state.game.players;
-}
-
-export const getListScore = (state) => {
-    return state.game.listScore;
-}
-
-export const getOpponentStatus = (state) => {
-    return state.game.opponentStatus;
 }

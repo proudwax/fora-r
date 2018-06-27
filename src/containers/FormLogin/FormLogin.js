@@ -13,6 +13,22 @@ import FormField from '../../components/FormField/FormField';
 
 
 class FormLogin extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.inputNickName = React.createRef();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.focusNickName = this.focusNickName.bind(this);
+    }
+
+    componentDidMount() {
+        this.focusNickName();
+    }
+    
+    focusNickName() {
+        !this.props.isAuthenticated && this.inputNickName.current.focus();
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         
@@ -38,6 +54,7 @@ class FormLogin extends React.Component {
                         placeholder='Your nickname'
                         autoComplete='off'
                         value={nickName}
+                        ref={this.inputNickName}
                         onChange={(event) => { onChangeNickName(event.target.value) }}
                     />
                 </FormField>

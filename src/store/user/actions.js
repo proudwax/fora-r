@@ -20,19 +20,3 @@ export const setRole = (role) => {
         payload: role
     }
 }
-
-export function setRoomID(roomID) {
-    return {
-        type: types.SET_ROOM_ID,
-        payload: roomID
-    }
-}
-
-export const asyncGetRoomID = () => dispatch => {
-    socket.emit('firstConnect');
-    socket.on('RoomID', roomID => {
-        setTimeout(()=> {
-            dispatch(setRoomID(Number(roomID)));
-        }, 500);
-    });    
-}

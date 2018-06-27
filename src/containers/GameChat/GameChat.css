@@ -1,5 +1,8 @@
 .GameChat {
     grid-area: footer;
+
+    background-color: #fff;
+    box-shadow: 0 0.005em 0.01em 0 rgba(0, 0, 0, .12), 0 2px 10px 0 rgba(0, 0, 0, .12);
 }
 .GameChat-Content {
     height: 20vh;

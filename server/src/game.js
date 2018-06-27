@@ -1,5 +1,3 @@
-
-
 class Game {
     constructor() {
         // Ключи объекта выигрывают
@@ -10,6 +8,9 @@ class Game {
             'lizard': ['spock', 'paper'],
             'spock': ['rock', 'scissors']
         }
+
+        this.gameID = null;
+        this.players = [];
     }
 
     round(player1, player2) {
@@ -23,6 +24,8 @@ class Game {
     }
 }
 
-let newGame = new Game();
+module.exports = Game;
 
-console.log(newGame.round('rock', 'rock'));
+// let newGame = new Game();
+
+// console.log(newGame.round('rock', 'rock'));

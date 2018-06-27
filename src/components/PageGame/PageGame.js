@@ -1,8 +1,8 @@
 import React from 'react';
 
 import MenuContainer from '../../containers/MenuContainer/MenuContainer';
-import GameChat from '../../containers/GameChat/GameChat';
 import Grid from '../Grid/Grid';
+import GameLogOut from '../../containers/GameLogOut/GameLogOut';
 
 import './PageGame.css';
 
@@ -10,9 +10,9 @@ const PageGame = () => {
     return (<Grid>
         <MenuContainer />
         <div className='PageGame'>
-            PageGame
+            Game
+            <GameLogOut />
         </div>
-        <GameChat/>
     </Grid>);
 }
 

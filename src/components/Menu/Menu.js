@@ -5,7 +5,7 @@ import './Menu.css';
 
 const Menu = (props) => {
     const items = props.items.map((item, index) => {
-        return (<li key={index}><NavLink exact activeClassName='active' to={item.path}>{item.text}</NavLink></li>);
+        return (<li className='Menu-Item' key={index}><NavLink className='Menu-Link' exact activeClassName='Menu-Link_active' to={item.path}>{item.text}</NavLink></li>);
     });
 
     return (<ul className='Menu'>{items}</ul>);

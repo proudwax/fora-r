@@ -9,6 +9,7 @@ const Room = require('./src/room');
 // console.log(req.url);
 // });
 
+const Rooms = [];
 
 io.on('connection', (client) => {
     const clientURL = url.parse(client.handshake.headers.referer).pathname; 
@@ -16,9 +17,12 @@ io.on('connection', (client) => {
     const roomID = room.getID();
 
     client.on('firstConnect', () => {
-        console.log('client gaming in room: ', roomID);
-        client.emit('RoomID', roomID);
         client.join(roomID);
+        client.emit('GameID', roomID);
+        Rooms.indexOf(roomID) === -1 && Rooms.push(roomID);
+
+        console.log('client gaming in room: ', roomID);
+        console.log(Rooms);
     });
     
     client.on('setNickName', (nickName) => {
@@ -34,8 +38,9 @@ io.on('connection', (client) => {
         }, interval);
     });
 
-    client.on('disconnect', function () {
+    client.on('disconnect', () => {
         console.log('user disconnected');
+        // console.log(Object.keys(client.adapter.rooms));
     });
 });
 

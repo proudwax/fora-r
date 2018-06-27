@@ -23,7 +23,7 @@ class Room {
         let parseUrl = /(\/game\/)(\d\w+)/g.exec(this.url);
 
         if (parseUrl) {
-            return parseUrl[2];
+            return Number(parseUrl[2]);
         } else {
             return Date.now();
         }

@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './types';
 
 const initialState = {
     isAuthenticated: false,
@@ -14,14 +14,4 @@ export default function reduce(state = initialState, action = {}) {
         default:
             return state;
     }
-}
-
-// Селектор  —  это чистая функция, принимающая в качестве аргумента глобальный стейт 
-// и возвращающая его в преобразованном виде.
-export const isLogin = (state) => {
-    return state.login.isAuthenticated;
-}
-
-export const isRedirected = (state) => {
-    return state.login.redirectToReferrer;
 }

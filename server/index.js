@@ -10,16 +10,17 @@ const Room = require('./src/room');
 // });
 
 const Rooms = [];
-let clientURL = ''; 
+let clientURL = '';
 let room = null;
 let roomID = null;
 
 io.on('connection', (client) => {
-    
-    client.on('createGame', () => {
+
+    client.on('createGame', (data) => {
         clientURL = url.parse(client.handshake.headers.referer).pathname;
         room = new Room(clientURL);
         roomID = room.getID();
+        client.nickName = data.name;
 
         if (Rooms.indexOf(roomID) === -1) {
             Rooms.push(roomID);
@@ -33,12 +34,12 @@ io.on('connection', (client) => {
                     });
                 });
             console.log('Add room', roomID);
-        } 
+        }
 
         // console.log('client gaming in room: ', roomID);
         // console.log(Rooms);
     });
-    
+
     // client.on('setNickName', (nickName) => {
     //     console.log('client nickName: ', nickName);
     //     io.sockets.in(roomID).emit('message', 'what is going on, party people?');
@@ -49,7 +50,7 @@ io.on('connection', (client) => {
     });
 
     client.on('logoutGame', (roomID) => {
-        
+
         client.leave(roomID);
 
         io.in(roomID).clients((error, clients) => {
@@ -66,7 +67,7 @@ io.on('connection', (client) => {
         //     });
         // }
 
-        
+
         // const index = Rooms.indexOf(roomID);
 
         // Rooms.splice(index, 1);
@@ -88,9 +89,9 @@ io.on('connection', (client) => {
 // for(let room of Rooms) {
 //     io.in(room).clients((error, socketIds) => {
 //         if (error) throw error;
-    
+
 //         socketIds.forEach(socketId => io.of('/').adapter.remoteLeave(socketId, room));
-    
+
 //     });
 // }
 

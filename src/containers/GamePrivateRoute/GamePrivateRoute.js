@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-import * as loginSelectors from '../../store/login/reducer';
+import { loginSelectors } from '../../store/login';
 
 const GamePrivateRoute = ({ component: Component, ...rest }) => {
     return (<Route {...rest} render={props => {
@@ -16,7 +16,7 @@ const GamePrivateRoute = ({ component: Component, ...rest }) => {
                     }}
                 />
             )
-        }
+    }
     }
     />);
 };

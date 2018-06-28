@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { gameSelectors, gameActions} from '../../store/game';
+import { gameSelectors, gameActions } from '../../store/game';
+import { userSelectors } from '../../store/user';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -25,12 +26,12 @@ class GameMenu extends React.Component {
             status: 'waiting'
         });
 
-        this.props.onCreateGame();
+        this.props.onCreateGame({ name: this.props.nickName });
     }
 
     render() {
         if (this.props.gameID) {
-         return (<Redirect to={{
+            return (<Redirect to={{
                 pathname: '/game/' + this.props.gameID,
                 state: { from: this.props.location }
             }}
@@ -54,7 +55,8 @@ class GameMenu extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        gameID: gameSelectors.getGameID(state)
+        gameID: gameSelectors.getGameID(state),
+        nickName: userSelectors.getNickName(state)
     };
 }
 

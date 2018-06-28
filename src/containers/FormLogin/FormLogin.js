@@ -3,17 +3,14 @@ import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as userSelectors from '../../store/user/reducer';
-import * as userActions from '../../store/user/actions';
-
-import * as loginSelectors from '../../store/login/reducer';
-import * as loginActions from '../../store/login/actions';
+import { userSelectors, userActions } from '../../store/user';
+import { loginSelectors, loginActions } from '../../store/login';
 
 import FormField from '../../components/FormField/FormField';
 
 
 class FormLogin extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.inputNickName = React.createRef();
@@ -24,14 +21,14 @@ class FormLogin extends React.Component {
     componentDidMount() {
         this.focusNickName();
     }
-    
+
     focusNickName() {
         !this.props.isAuthenticated && this.inputNickName.current.focus();
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        
+
         this.props.onAuthenticate();
     };
 
@@ -83,7 +80,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onChangeNickName: bindActionCreators(userActions.changeNickName, dispatch),
-        onAuthenticate: bindActionCreators(loginActions.authenticate,dispatch)
+        onAuthenticate: bindActionCreators(loginActions.authenticate, dispatch)
     };
 };
 

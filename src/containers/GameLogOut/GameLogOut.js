@@ -15,9 +15,10 @@ class GameLogOut extends React.Component {
     }
 
     handleClick() {
-        this.props.onLogOut();
+        const { onLogOut, gameID, history } = this.props;
 
-        this.props.history.push('/game');
+        onLogOut(gameID);
+        history.push('/game');
     }
 
     render() {
@@ -35,7 +36,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogOut: bindActionCreators(gameActions.setGameID, dispatch)
+        onLogOut: bindActionCreators(gameActions.logOutGame, dispatch)
     }
 };
 

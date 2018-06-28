@@ -22,10 +22,21 @@ export function setGameID(gameID) {
 }
 
 export const createGame = () => dispatch => {
-    socket.emit('firstConnect');
+    socket.emit('createGame');
     socket.on('GameID', gameID => {
         setTimeout(() => {
             dispatch(setGameID(Number(gameID)));
         }, 500);
     });
+}
+
+export const logOutGame = (gameID) => dispatch => {
+    console.log(gameID);
+    socket.emit('logoutGame', gameID);
+    dispatch(setGameID(null));
+}
+
+export const getGames = (cb) => {
+    socket.emit('getGames');
+    socket.on('rooms', (games) => { console.log(games); return cb(null, games) });
 }

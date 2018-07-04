@@ -8,14 +8,15 @@ class GamesActive extends React.Component {
     constructor (props) {
         super(props);
 
-        getGames((err, games) => {
-            return this.setState({ games: games });
-        });
+        this.state = {
+            games: []
+        };
+
+        // getGames((err, games) => {
+        //     return this.setState({ games: games });
+        // });
     }
 
-    state = {
-        games: null
-    };
 
     render() {
 

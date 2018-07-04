@@ -3,40 +3,60 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:8000');
 
-export function addListScore(store) {
+export function setID(id) {
     return {
-        type: types.ADD_SCORE,
-        payload: store
-    };
-}
-
-export function listenOpponentStatus(store) {
-    socket.emit('sendStore', store);
-}
-
-export function setGameID(gameID) {
-    return {
-        type: types.SET_GAME_ID,
-        payload: gameID
+        type: types.SET_ID,
+        payload: id
     }
 }
 
-export const createGame = () => dispatch => {
+export const connected = (bool) => {
+    return {
+        type: types.CONNECTED,
+        payload: bool
+    }
+}
+
+export const quit = () => {
+    return {
+        type: types.QUIT,
+        payload: { id: null, connected: false }
+    }
+}
+
+export const create = () => dispatch => {
     socket.emit('createGame');
-    socket.on('GameID', gameID => {
+
+    socket.on('createdGameID', gameID => {
         setTimeout(() => {
-            dispatch(setGameID(Number(gameID)));
+            dispatch(setID(Number(gameID)));
         }, 500);
     });
 }
 
-export const logOutGame = (gameID) => dispatch => {
-    console.log(gameID);
+export const connect = (gameID) => (dispatch) => {
+    socket.emit('connectGame', gameID);
+
+    socket.on('connectedGame', bool => {
+        setTimeout(() => {
+            dispatch(connected(bool));
+        }, 500);
+    });
+}
+
+export const logout = (gameID) => dispatch => {
     socket.emit('logoutGame', gameID);
-    dispatch(setGameID(null));
+    dispatch(quit());
 }
 
 export const getGames = (cb) => {
     socket.emit('getGames');
     socket.on('rooms', (games) => { console.log(games); return cb(null, games) });
 }
+
+socket.on('reconnect', function () {
+    console.log('reconnect');
+    // if (username) {
+    //     socket.emit('add user', username);
+    // }
+});

@@ -25,13 +25,13 @@ class GameMenu extends React.Component {
             status: 'waiting'
         });
 
-        this.props.onCreateGame();
+        this.props.onCreate();
     }
 
     render() {
-        if (this.props.gameID) {
+        if (this.props.id) {
          return (<Redirect to={{
-                pathname: '/game/' + this.props.gameID,
+                pathname: '/game/' + this.props.id,
                 state: { from: this.props.location }
             }}
             />);
@@ -54,13 +54,13 @@ class GameMenu extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        gameID: gameSelectors.getGameID(state)
+        id: gameSelectors.getID(state)
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onCreateGame: bindActionCreators(gameActions.createGame, dispatch),
+        onCreate: bindActionCreators(gameActions.create, dispatch),
     }
 };
 

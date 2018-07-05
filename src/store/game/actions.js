@@ -1,7 +1,5 @@
 import * as types from './types';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:8000');
+import * as Game from '../../api/socket';
 
 export function setID(id) {
     return {
@@ -25,38 +23,21 @@ export const quit = () => {
 }
 
 export const create = () => dispatch => {
-    socket.emit('createGame');
-
-    socket.on('createdGameID', gameID => {
+    Game.common.create((err, gameID) => {
         setTimeout(() => {
             dispatch(setID(Number(gameID)));
         }, 500);
-    });
+    }, null);
 }
 
 export const connect = (gameID) => (dispatch) => {
-    socket.emit('connectGame', gameID);
-
-    socket.on('connectedGame', bool => {
+    Game.common.connect((err, bool) => {
         setTimeout(() => {
             dispatch(connected(bool));
         }, 500);
-    });
+    }, gameID);
 }
 
-export const logout = (gameID) => dispatch => {
-    socket.emit('logoutGame', gameID);
-    dispatch(quit());
+export const logout = (gameID) => (dispatch) => {
+    Game.common.logout(() => dispatch(quit()), gameID);
 }
-
-export const getGames = (cb) => {
-    socket.emit('getGames');
-    socket.on('rooms', (games) => { console.log(games); return cb(null, games) });
-}
-
-socket.on('reconnect', function () {
-    console.log('reconnect');
-    // if (username) {
-    //     socket.emit('add user', username);
-    // }
-});

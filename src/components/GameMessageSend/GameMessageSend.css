@@ -1,0 +1,61 @@
+.GameMessageSend {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+
+    align-items: center;
+}
+
+.GameMessageSend-Input{
+    box-sizing: border-box;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    width: 100%;
+    padding: 0 10px;
+    line-height: 30px;
+
+    border: 1px solid rgba(0, 0, 0, 0.45);
+    border-radius: 0 0 0 4px;
+}
+
+.GameMessageSend-Input:focus {
+    outline: none;
+    border-color: #535196;
+}
+
+.GameMessageSend-Button {
+    box-sizing: border-box;
+
+    display: inline-flex;
+
+    margin: 0;
+    padding-left: 12px;
+    padding-right: 12px;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 30px;
+
+    color: #fff;
+    text-align: center;
+    border: 0;
+    background-color: #535196;
+    transition: all .25s ease-out;
+}
+.GameMessageSend-Button:hover {
+    cursor: pointer;
+    background-color: #422498;
+}
+
+.GameMessageSend-Button:focus {
+    outline: none;
+    background-color: #ffdb4d;
+    background-color: #900;
+}
+
+.GameMessageSend-Button:disabled {
+    background-color: rgba(65, 36, 152, 0.25);
+}

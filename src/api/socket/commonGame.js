@@ -1,6 +1,4 @@
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:8000');
+import socket from './socket';
 
 export const create = (cb, data) => {
     socket.on('createdGameID', gameID => cb(null, gameID));
@@ -17,13 +15,9 @@ export const logout = (cb, data) => {
     cb();
 }
 
-
-
-
-
-
-
-
+export const addUser = (data) => {
+    socket.emit('addUser', data);
+}
 
 
 socket.on('reconnect', function () {

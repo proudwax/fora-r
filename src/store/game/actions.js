@@ -1,5 +1,5 @@
 import * as types from './types';
-import * as Game from '../../api/socket';
+import { commonGame } from '../../api/socket';
 
 export function setID(id) {
     return {
@@ -23,7 +23,7 @@ export const quit = () => {
 }
 
 export const create = () => dispatch => {
-    Game.common.create((err, gameID) => {
+    commonGame.create((err, gameID) => {
         setTimeout(() => {
             dispatch(setID(Number(gameID)));
         }, 500);
@@ -31,7 +31,7 @@ export const create = () => dispatch => {
 }
 
 export const connect = (gameID) => (dispatch) => {
-    Game.common.connect((err, bool) => {
+    commonGame.connect((err, bool) => {
         setTimeout(() => {
             dispatch(connected(bool));
         }, 500);
@@ -39,5 +39,5 @@ export const connect = (gameID) => (dispatch) => {
 }
 
 export const logout = (gameID) => (dispatch) => {
-    Game.common.logout(() => dispatch(quit()), gameID);
+    commonGame.logout(() => dispatch(quit()), gameID);
 }

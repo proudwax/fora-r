@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './GameMessageSend.css';
+
 class GameMessageSend extends React.Component {
     constructor(props) {
         super(props);

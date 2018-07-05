@@ -1,17 +1,11 @@
-import * as types from './actionTypes';
-import io from 'socket.io-client';
-
-const socket = io('http://localhost:8000');
+import * as types from './types';
+import * as Game from '../../api/socket';
 
 export function changeNickName(nickName) {
     return {
         type: types.SET_NICKNAME,
         payload: nickName
     };
-}
-
-export const sendNickName = (nickName) => {
-    socket.emit('setNickName', nickName);
 }
 
 export const setRole = (role) => {

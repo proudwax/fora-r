@@ -1,11 +1,32 @@
 .GameMessages {
-    display: flex;
-    flex-flow: column;
+    overflow-y: scroll;
+    height: 100%;
+
+    margin: 0;
 }
 .GameMessage {
+    width: 100%;
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.GameMessage_me {
+    flex-direction: row-reverse;
 }
 .GameMessage-Name {
+    padding-left: 10px;
     padding-right: 10px;
     color: rgba(000, 000, 000, .4);
+}
+.GameMessage-Text{
+    box-sizing: border-box;
+
+    padding: 10px;
+    margin: 10px;
+
+    background-color: #fff;
+    box-shadow: 0 0.005em 0.01em 0 rgba(0, 0, 0, .12),
+    0 2px 10px 0 rgba(0, 0, 0, .12);
+    border-radius: 4px;
 }

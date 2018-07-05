@@ -15,6 +15,16 @@ let room = null;
 let roomID = null;
 
 io.on('connection', (client) => {
+    let addedUser = false;
+
+    client.on('addUser', (userName) => {
+        if (addedUser) return;
+
+        client.userName = userName;
+        addedUser = true;
+
+        console.log(`user ${client.userName} is connected`);
+    });
     
     client.on('createGame', () => {
 
@@ -43,11 +53,14 @@ io.on('connection', (client) => {
 
     client.on('connectGame', (roomID) => {
         client.join(roomID, () => {
-                console.log('join the game ID ', roomID);
-                io.in(roomID).clients((error, clients) => {
-                    if (error) throw error;
-                    console.log(clients);
-                });
+                client.userRoom = roomID;
+                console.log(`${client.userName} join the game ID ${roomID}`);
+
+                // io.in(roomID).clients((error, clients) => {
+                //     if (error) throw error;
+                //     console.log(clients);
+                // });
+                io.to(client.userRoom).emit('joinMessageGame', { name: client.userName });
             })
             .emit('connectedGame', true);
     })
@@ -60,6 +73,8 @@ io.on('connection', (client) => {
             if (error) throw error;
             console.log(clients);
         });
+
+        io.to(roomID).emit('leaveMessageGame', { name: client.userName });
         // console.log(typeof roomID);
 
         // console.log(client.adapter.rooms);
@@ -77,9 +92,18 @@ io.on('connection', (client) => {
     });
 
     client.on('disconnect', () => {
-        console.log('user disconnected');
-        // console.log('user disconnected', client.adapter.rooms);
+        console.log(`user ${client.userName} is disconnected`);
+        io.to(client.userRoom).emit('leaveMessageGame', {name: client.userName});
     });
+
+
+    // Chat
+    client.on('sendMessageGame', (message) => {
+        io.to(client.userRoom).emit('newMessageGame', { name: client.userName, text: message });
+        console.log(`user ${client.userName} send message: ${message}`);
+    });
+
+
 });
 
 http.listen(port, () => {

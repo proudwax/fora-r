@@ -1,5 +1,8 @@
-import * as common from './commonGame';
+import * as commonGame from './commonGame';
+import * as chatGame from './chatGame';
 
 export {
-    common
+    commonGame,
+    chatGame
 };
+

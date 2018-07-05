@@ -3,8 +3,9 @@ import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as userSelectors from '../../store/user/reducer';
-import * as userActions from '../../store/user/actions';
+import { userSelectors, userActions } from '../../store/user';
+
+import { commonGame } from '../../api/socket';
 
 import * as loginSelectors from '../../store/login/reducer';
 import * as loginActions from '../../store/login/actions';
@@ -30,9 +31,12 @@ class FormLogin extends React.Component {
     }
 
     handleSubmit = (event) => {
+        const { nickName, onAuthenticate } = this.props;
+
         event.preventDefault();
         
-        this.props.onAuthenticate();
+        onAuthenticate();
+        commonGame.addUser(nickName);
     };
 
     render() {

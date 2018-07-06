@@ -1,2 +1,3 @@
 export const NEW_MESSAGE = 'chat.NEW_MESSAGE';
-export const SEND_MESSAGE = 'chat.SEND_MESSAGE';
+export const INITED = 'chat.INITED';
+export const LOGOUT = 'chat.LOGOUT';

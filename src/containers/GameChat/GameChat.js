@@ -18,15 +18,19 @@ class GameChat extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() { 
-        this.props.onAddMessage();
-        this.props.onJoinMessage();
-        this.props.onLeaveMessage();
+    componentDidMount() {
+        const { inited, onChangeInit, onAddMessage, onJoinMessage, onLeaveMessage } = this.props;
+
+        // не плодим подписки на socket
+        if (!inited) {
+            onChangeInit(true);
+            onAddMessage();
+            onJoinMessage();
+            onLeaveMessage();
+        }
     }
 
     handleSubmit(message) {
-        const { nickName } = this.props;
-
         chatGame.sendMessage(message);
     }
 
@@ -47,12 +51,14 @@ class GameChat extends React.Component {
 const mapStateToProps = (state) => {
     return {
         nickName: userSelectors.getNickName(state),
+        inited: chatSelectors.isInited(state),
         messages: chatSelectors.getMessages(state)
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onChangeInit: bindActionCreators(chatActions.changeInit, dispatch),
         onAddMessage: bindActionCreators(chatActions.addMessage, dispatch),
         onJoinMessage: bindActionCreators(chatActions.joinMessage, dispatch),
         onLeaveMessage: bindActionCreators(chatActions.leaveMessage, dispatch)

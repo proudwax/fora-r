@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '../../components/Button/Button';
+
 import './GameMessageSend.css';
 
 class GameMessageSend extends React.Component {
@@ -44,13 +46,14 @@ class GameMessageSend extends React.Component {
                 value={value} 
                 onChange={handleChange}
             />
-            <button 
-                className='GameMessageSend-Button'
+            <Button 
+                classes='GameMessageSend-Button'
+                color='primary'
                 type='submit'
                 disabled={handleDisabled(value)}
             >
                 Send
-            </button>
+            </Button>
         </form>);
     }
 }

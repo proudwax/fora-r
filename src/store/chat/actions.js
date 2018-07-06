@@ -8,6 +8,20 @@ export function newMessage(message) {
     }
 }
 
+export const changeInit = (bool) => {
+    return {
+        type: types.INITED,
+        payload: bool
+    }
+}
+
+export const logout = () => {
+    return {
+        type: types.LOGOUT,
+        payload: []
+    }
+}
+
 export const addMessage = () => dispatch => {
     chatGame.newMessage((err, message) => {
         dispatch(newMessage({...message, status: 'new' }));

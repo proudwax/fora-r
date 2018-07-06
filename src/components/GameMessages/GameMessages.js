@@ -12,8 +12,12 @@ class GameMessages extends React.Component {
     
     handleDown() {
         const node = this.messages.current;
-
+        
         node.scrollTop = node.scrollHeight;
+    }
+
+    componentDidMount() {
+        this.handleDown();
     }
     
     componentDidUpdate(){
@@ -26,13 +30,13 @@ class GameMessages extends React.Component {
         const messages = items.map((item, index) => {
             if (item.status === 'join') {
                 return (<div className='GameMessage' key={index}>
-                    <div className='GameMessage-Name'>joined {item.name}</div>
+                    <div className='GameMessage-Info GameMessage-Info_join'>joined {item.name}</div>
                 </div>);
             }
 
             if (item.status === 'leave') {
                 return (<div className='GameMessage' key={index}>
-                    <div className='GameMessage-Name'>leave {item.name}</div>
+                    <div className='GameMessage-Info GameMessage-Info_leave'>leave {item.name}</div>
                 </div>);
             }
 

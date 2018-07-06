@@ -1,5 +1,4 @@
 import * as types from './types';
-import * as Game from '../../api/socket';
 
 export function changeNickName(nickName) {
     return {

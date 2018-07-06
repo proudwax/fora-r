@@ -15,3 +15,7 @@ export const joinMessage = (cb) => {
 export const leaveMessage = (cb) => {
     socket.on('leaveMessageGame', data => cb(null, data));
 }
+
+export const close = () => {
+    socket.close();
+}

@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { gameSelectors, gameActions} from '../../store/game';
 
 import Spinner from '../../components/Spinner/Spinner';
+import Button from '../../components/Button/Button';
 
 import './GameMenu.css';
 
@@ -45,8 +46,8 @@ class GameMenu extends React.Component {
 
         return (
             <div className='GameMenu'>
-                <div className='GameMenu-Item'><button onClick={this.handleCreate} className='GameMenu-Button'>Create Game</button></div>
-                <div className='GameMenu-Item'><button className='GameMenu-Button'>Connect to Game</button></div>
+                <div className='GameMenu-Item'><Button color='primary' classes='GameMenu-Button' onClick={this.handleCreate}>Create Game</Button></div>
+                <div className='GameMenu-Item'><Button color='primary' classes='GameMenu-Button'>Connect to Game</Button></div>
             </div>
         );
     }

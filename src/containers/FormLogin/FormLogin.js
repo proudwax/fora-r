@@ -11,6 +11,8 @@ import * as loginSelectors from '../../store/login/reducer';
 import * as loginActions from '../../store/login/actions';
 
 import FormField from '../../components/FormField/FormField';
+import Input from '../../components/Input/Input';
+import Button from '../../components/Button/Button';
 
 import './FormLogin.css';
 
@@ -28,7 +30,7 @@ class FormLogin extends React.Component {
     }
     
     focusNickName() {
-        !this.props.isAuthenticated && this.inputNickName.current.focus();
+        // !this.props.isAuthenticated && this.inputNickName.current.focus();
     }
 
     handleSubmit = (event) => {
@@ -54,22 +56,22 @@ class FormLogin extends React.Component {
                 <form className='FormLogin-Form' onSubmit={this.handleSubmit}>
                     <h2>Enter your nick name {}</h2>
                     <FormField>
-                        <input
-                            type='text'
+                        <Input type='text'
                             name='Login'
+                            size='m'
+                            autoFocus='true'
                             placeholder='Your nickname'
                             autoComplete='off'
                             value={nickName}
                             ref={this.inputNickName}
-                            onChange={(event) => { onChangeNickName(event.target.value) }}
-                        />
+                            onChange={(event) => { onChangeNickName(event.target.value) }}/>
+                        
                     </FormField>
-                    <button
-                        className='Button'
+                    <Button
                         text='Send'
                         type='submit'
                         disabled={toggleDisabledButton(nickName)}
-                    >Send</button>
+                    >Send</Button>
                 </form>
             </div>
         );

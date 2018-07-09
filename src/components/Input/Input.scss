@@ -1,0 +1,60 @@
+@import '../../theme/test/index.scss';
+
+.Input {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    
+    position: relative;
+    display: inline-flex;
+    background: rgba(0, 0, 0, .2);
+    -webkit-tap-highlight-color: transparent;
+    
+    &:before {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+        content: "";
+        background: #fff;
+    }
+
+    @each $size in (map-keys($size-typo)) {
+        &_size_#{$size} {
+            font-size: map-get($size-typo, $size);
+            line-height: map-get($line-height-typo, $size);
+        }
+
+        &_size_#{$size} .Input-Control {
+            height: (map-get($line-height-typo, $size) + 12px);
+            padding: 0 (map-get($line-height-typo, $size) / 2);
+        }
+    } 
+}
+
+.Input-Control {
+    font: inherit;
+    line-height: inherit;
+    position: relative;
+    display: inline-block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: none;
+    -webkit-appearance: none;
+}
+
+.Input_focused {
+    z-index: 1;
+
+    &:before {
+        box-shadow: 0 0 0 1px #fc0, inset 0 0 0 1px #fc0
+    }
+
+    & .Input-Control {
+        text-overflow: clip
+    }
+}

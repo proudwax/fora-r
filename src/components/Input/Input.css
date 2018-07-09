@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* Размеры текста */
+/* Размеры текста */
+/* Межстрочный интервал */
+/* Межстрочный интервал */
+/* Отступы */
+.Input {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  position: relative;
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: transparent; }
+  .Input:before {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    content: "";
+    background: #fff; }
+  .Input_size_xs {
+    font-size: 11px;
+    line-height: 15px; }
+  .Input_size_xs .Input-Control {
+    height: 27px;
+    padding: 0 7.5px; }
+  .Input_size_s {
+    font-size: 13px;
+    line-height: 18px; }
+  .Input_size_s .Input-Control {
+    height: 30px;
+    padding: 0 9px; }
+  .Input_size_m {
+    font-size: 15px;
+    line-height: 21px; }
+  .Input_size_m .Input-Control {
+    height: 33px;
+    padding: 0 10.5px; }
+  .Input_size_l {
+    font-size: 18px;
+    line-height: 25px; }
+  .Input_size_l .Input-Control {
+    height: 37px;
+    padding: 0 12.5px; }
+  .Input_size_xl {
+    font-size: 20px;
+    line-height: 28px; }
+  .Input_size_xl .Input-Control {
+    height: 40px;
+    padding: 0 14px; }
+  .Input_size_xxl {
+    font-size: 24px;
+    line-height: 34px; }
+  .Input_size_xxl .Input-Control {
+    height: 46px;
+    padding: 0 17px; }
+  .Input_size_xxxl {
+    font-size: 32px;
+    line-height: 42px; }
+  .Input_size_xxxl .Input-Control {
+    height: 54px;
+    padding: 0 21px; }
+  .Input_size_xxxxl {
+    font-size: 48px;
+    line-height: 62px; }
+  .Input_size_xxxxl .Input-Control {
+    height: 74px;
+    padding: 0 31px; }
+  .Input_size_xxxxxl {
+    font-size: 72px;
+    line-height: 82px; }
+  .Input_size_xxxxxl .Input-Control {
+    height: 94px;
+    padding: 0 41px; }
+  .Input_size_xxxxxxl {
+    font-size: 96px;
+    line-height: 115px; }
+  .Input_size_xxxxxxl .Input-Control {
+    height: 127px;
+    padding: 0 57.5px; }
+
+.Input-Control {
+  font: inherit;
+  line-height: inherit;
+  position: relative;
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: none;
+  -webkit-appearance: none; }
+
+.Input_focused {
+  z-index: 1; }
+  .Input_focused:before {
+    box-shadow: 0 0 0 1px #fc0, inset 0 0 0 1px #fc0; }
+  .Input_focused .Input-Control {
+    text-overflow: clip; }

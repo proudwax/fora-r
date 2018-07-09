@@ -1,0 +1,67 @@
+@charset "UTF-8";
+/* Размеры текста */
+/* Размеры текста */
+/* Межстрочный интервал */
+/* Межстрочный интервал */
+/* Отступы */
+/* Отступы */
+.Input {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  position: relative;
+  display: inline-flex;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: transparent; }
+  .Input:before {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    content: "";
+    background: #fff; }
+  .Input_size_s {
+    font-size: 13px;
+    line-height: 18px; }
+  .Input_size_s .Input-Control {
+    height: 30px;
+    padding: 0 9px; }
+  .Input_size_m {
+    font-size: 15px;
+    line-height: 22px; }
+  .Input_size_m .Input-Control {
+    height: 34px;
+    padding: 0 11px; }
+  .Input_size_l {
+    font-size: 18px;
+    line-height: 25px; }
+  .Input_size_l .Input-Control {
+    height: 37px;
+    padding: 0 12.5px; }
+  .Input_size_xl {
+    font-size: 20px;
+    line-height: 28px; }
+  .Input_size_xl .Input-Control {
+    height: 40px;
+    padding: 0 14px; }
+
+.Input-Control {
+  font: inherit;
+  line-height: inherit;
+  position: relative;
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: none;
+  -webkit-appearance: none; }
+
+.Input_focused {
+  z-index: 1; }
+  .Input_focused:before {
+    box-shadow: 0 0 0 1px #fc0, inset 0 0 0 1px #fc0; }
+  .Input_focused .Input-Control {
+    text-overflow: clip; }

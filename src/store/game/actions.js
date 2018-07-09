@@ -1,42 +1,43 @@
 import * as types from './types';
-import io from 'socket.io-client';
+import { commonGame } from '../../api/socket';
 
-const socket = io('http://localhost:8000');
-
-export function addListScore(store) {
+export function setID(id) {
     return {
-        type: types.ADD_SCORE,
-        payload: store
-    };
-}
-
-export function listenOpponentStatus(store) {
-    socket.emit('sendStore', store);
-}
-
-export function setGameID(gameID) {
-    return {
-        type: types.SET_GAME_ID,
-        payload: gameID
+        type: types.SET_ID,
+        payload: id
     }
 }
 
-export const createGame = (data) => (dispatch) => {
-    socket.emit('createGame', data);
-    socket.on('GameID', (gameID) => {
+export const connected = (bool) => {
+    return {
+        type: types.CONNECTED,
+        payload: bool
+    }
+}
+
+export const quit = () => {
+    return {
+        type: types.QUIT,
+        payload: { id: null, connected: false }
+    }
+}
+
+export const create = () => dispatch => {
+    commonGame.create((err, gameID) => {
         setTimeout(() => {
-            dispatch(setGameID(Number(gameID)));
+            dispatch(setID(Number(gameID)));
         }, 500);
-    });
+    }, null);
 }
 
-export const logOutGame = (gameID) => (dispatch) => {
-    console.log(gameID);
-    socket.emit('logoutGame', gameID);
-    dispatch(setGameID(null));
+export const connect = (gameID) => (dispatch) => {
+    commonGame.connect((err, bool) => {
+        setTimeout(() => {
+            dispatch(connected(bool));
+        }, 500);
+    }, gameID);
 }
 
-export const getGames = (cb) => {
-    socket.emit('getGames');
-    socket.on('rooms', (games) => { console.log(games); return cb(null, games) });
+export const logout = (gameID) => (dispatch) => {
+    commonGame.logout(() => dispatch(quit()), gameID);
 }

@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { gameSelectors, gameActions} from '../../store/game';
+import { chatActions } from '../../store/chat';
+
+import Button from '../../components/Button/Button';
 
 import './GameLogOut.css';
 
@@ -15,28 +18,31 @@ class GameLogOut extends React.Component {
     }
 
     handleClick() {
-        const { onLogOut, gameID, history } = this.props;
+        const { onLogOut, onLogOutChat, id, history } = this.props;
 
-        onLogOut(gameID);
+        onLogOut(id);
+        onLogOutChat();
         history.push('/game');
     }
 
     render() {
         return (
-            <button className='GameLogOut' onClick={this.handleClick}>Log out Game</button>
+            <Button onClick={this.handleClick}>Log out Game</Button>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        gameID: gameSelectors.getGameID(state)
+        id: gameSelectors.getID(state),
+        isConnected: gameSelectors.isConnected(state)
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogOut: bindActionCreators(gameActions.logOutGame, dispatch)
+        onLogOut: bindActionCreators(gameActions.logout, dispatch),
+        onLogOutChat: bindActionCreators(chatActions.logout, dispatch)
     }
 };
 

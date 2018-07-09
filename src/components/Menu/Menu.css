@@ -8,6 +8,14 @@
 
     background-color: #fff;
     box-shadow: 0 0.005em 0.01em 0 rgba(0, 0, 0, .12), 0 2px 10px 0 rgba(0, 0, 0, .12);
+
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.Menu-Item {
+    box-sizing: border-box;
+    padding: 3px 8px;
 }
 
 .Menu-Link {

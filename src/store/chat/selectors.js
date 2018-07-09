@@ -1,9 +1,9 @@
 // Селектор  —  это чистая функция, принимающая в качестве аргумента глобальный стейт 
 // и возвращающая его в преобразованном виде.
-export const getID = (state) => {
-    return state.game.id;
+export const getMessages = (state) => {
+    return state.chat.messages;
 }
 
-export const isConnected = (state) => {
-    return state.game.connected;
+export const isInited = (state) => {
+    return state.chat.init;
 }

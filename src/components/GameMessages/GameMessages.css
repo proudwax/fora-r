@@ -1,11 +1,51 @@
 .GameMessages {
-    display: flex;
-    flex-flow: column;
+    overflow-y: scroll;
+    height: 100%;
+
+    margin: 0;
 }
 .GameMessage {
+    width: 100%;
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.GameMessage_me {
+    flex-direction: row-reverse;
 }
 .GameMessage-Name {
+    font-size: 13px;
+    line-height: 15px;
+
+    padding-left: 10px;
     padding-right: 10px;
     color: rgba(000, 000, 000, .4);
+}
+.GameMessage-Info {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgba(000, 000, 000, .4);
+}
+.GameMessage-Info_join{
+    color: rgba(27, 114, 27, 0.5);
+}
+.GameMessage-Info_leave{
+    color: rgba(218, 56, 16, 0.5);
+}
+.GameMessage-Text{
+    box-sizing: border-box;
+
+    font-size: 15px;
+    line-height: 15px;
+
+    padding: 10px;
+    margin: 5px 10px;
+
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 1px 10px -5px rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
 }

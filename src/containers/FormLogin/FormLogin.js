@@ -6,8 +6,11 @@ import { connect } from 'react-redux';
 import { userSelectors, userActions } from '../../store/user';
 import { loginSelectors, loginActions } from '../../store/login';
 
+import { commonGame } from '../../api/socket';
+
 import FormField from '../../components/FormField/FormField';
 
+import './FormLogin.css';
 
 class FormLogin extends React.Component {
     constructor(props) {
@@ -27,9 +30,12 @@ class FormLogin extends React.Component {
     }
 
     handleSubmit = (event) => {
+        const { nickName, onAuthenticate } = this.props;
+
         event.preventDefault();
 
-        this.props.onAuthenticate();
+        onAuthenticate();
+        commonGame.addUser(nickName);
     };
 
     render() {
@@ -42,26 +48,28 @@ class FormLogin extends React.Component {
         }
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h2>Enter your nick name {}</h2>
-                <FormField>
-                    <input
-                        type='text'
-                        name='Login'
-                        placeholder='Your nickname'
-                        autoComplete='off'
-                        value={nickName}
-                        ref={this.inputNickName}
-                        onChange={(event) => { onChangeNickName(event.target.value) }}
-                    />
-                </FormField>
-                <button
-                    className='Button'
-                    text='Send'
-                    type='submit'
-                    disabled={toggleDisabledButton(nickName)}
-                >Send</button>
-            </form>
+            <div className='FormLogin'>
+                <form className='FormLogin-Form' onSubmit={this.handleSubmit}>
+                    <h2>Enter your nick name {}</h2>
+                    <FormField>
+                        <input
+                            type='text'
+                            name='Login'
+                            placeholder='Your nickname'
+                            autoComplete='off'
+                            value={nickName}
+                            ref={this.inputNickName}
+                            onChange={(event) => { onChangeNickName(event.target.value) }}
+                        />
+                    </FormField>
+                    <button
+                        className='Button'
+                        text='Send'
+                        type='submit'
+                        disabled={toggleDisabledButton(nickName)}
+                    >Send</button>
+                </form>
+            </div>
         );
     }
 }

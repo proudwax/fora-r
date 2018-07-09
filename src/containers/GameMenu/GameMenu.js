@@ -7,6 +7,7 @@ import { gameSelectors, gameActions } from '../../store/game';
 import { userSelectors } from '../../store/user';
 
 import Spinner from '../../components/Spinner/Spinner';
+import Button from '../../components/Button/Button';
 
 import './GameMenu.css';
 
@@ -26,13 +27,13 @@ class GameMenu extends React.Component {
             status: 'waiting'
         });
 
-        this.props.onCreateGame({ name: this.props.nickName });
+        this.props.onCreate();
     }
 
     render() {
-        if (this.props.gameID) {
+        if (this.props.id) {
             return (<Redirect to={{
-                pathname: '/game/' + this.props.gameID,
+                pathname: '/game/' + this.props.id,
                 state: { from: this.props.location }
             }}
             />);
@@ -46,8 +47,8 @@ class GameMenu extends React.Component {
 
         return (
             <div className='GameMenu'>
-                <div className='GameMenu-Item'><button onClick={this.handleCreate} className='GameMenu-Button'>Create Game</button></div>
-                <div className='GameMenu-Item'><button className='GameMenu-Button'>Connect to Game</button></div>
+                <div className='GameMenu-Item'><Button color='primary' classes='GameMenu-Button' onClick={this.handleCreate}>Create Game</Button></div>
+                <div className='GameMenu-Item'><Button color='primary' classes='GameMenu-Button'>Connect to Game</Button></div>
             </div>
         );
     }
@@ -55,14 +56,13 @@ class GameMenu extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        gameID: gameSelectors.getGameID(state),
-        nickName: userSelectors.getNickName(state)
+        id: gameSelectors.getID(state)
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onCreateGame: bindActionCreators(gameActions.createGame, dispatch),
+        onCreate: bindActionCreators(gameActions.create, dispatch),
     }
 };
 

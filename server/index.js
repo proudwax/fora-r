@@ -15,39 +15,55 @@ let room = null;
 let roomID = null;
 
 io.on('connection', (client) => {
+    let addedUser = false;
 
-    client.on('createGame', (data) => {
+    client.on('addUser', (userName) => {
+        if (addedUser) return;
+
+        client.userName = userName;
+        addedUser = true;
+
+        console.log(`user ${client.userName} is connected`);
+    });
+
+    client.on('createGame', () => {
+
         clientURL = url.parse(client.handshake.headers.referer).pathname;
         room = new Room(clientURL);
         roomID = room.getID();
-        client.nickName = data.name;
 
-        if (Rooms.indexOf(roomID) === -1) {
-            Rooms.push(roomID);
-            client
-                .emit('rooms', Rooms)
-                .emit('GameID', roomID)
-                .join(roomID, () => {
-                    io.in(roomID).clients((error, clients) => {
-                        if (error) throw error;
-                        console.log(clients);
-                    });
-                });
-            console.log('Add room', roomID);
-        }
+        console.log('create game ID ', roomID);
+        client.emit('createdGameID', roomID);
 
-        // console.log('client gaming in room: ', roomID);
-        // console.log(Rooms);
+        // if (Rooms.indexOf(roomID) === -1) {
+        //     Rooms.push(roomID);
+        //     client
+        //         .emit('rooms', Rooms)
+        //         .emit('GameID', roomID)
+        //         .join(roomID, () => {
+        //             io.in(roomID).clients((error, clients) => {
+        //                 if (error) throw error;
+        //                 console.log(clients);
+        //             });
+        //         });
+        //     console.log('Add room', roomID);
+        // } 
+
     });
 
-    // client.on('setNickName', (nickName) => {
-    //     console.log('client nickName: ', nickName);
-    //     io.sockets.in(roomID).emit('message', 'what is going on, party people?');
-    // });
+    client.on('connectGame', (roomID) => {
+        client.join(roomID, () => {
+            client.userRoom = roomID;
+            console.log(`${client.userName} join the game ID ${roomID}`);
 
-    client.on('getGames', () => {
-        client.emit('rooms', Rooms);
-    });
+            // io.in(roomID).clients((error, clients) => {
+            //     if (error) throw error;
+            //     console.log(clients);
+            // });
+            io.to(client.userRoom).emit('joinMessageGame', { name: client.userName });
+        })
+            .emit('connectedGame', true);
+    })
 
     client.on('logoutGame', (roomID) => {
 
@@ -57,6 +73,8 @@ io.on('connection', (client) => {
             if (error) throw error;
             console.log(clients);
         });
+
+        io.to(roomID).emit('leaveMessageGame', { name: client.userName });
         // console.log(typeof roomID);
 
         // console.log(client.adapter.rooms);
@@ -73,28 +91,20 @@ io.on('connection', (client) => {
         // Rooms.splice(index, 1);
     });
 
-    client.on('subscribeToTimer', (interval) => {
-        console.log('client is subscribing to timer with interval ', interval);
-        setInterval(() => {
-            client.emit('timer', new Date());
-        }, interval);
-    });
-
     client.on('disconnect', () => {
-        console.log('user disconnected');
-        // console.log('user disconnected', client.adapter.rooms);
+        console.log(`user ${client.userName} is disconnected`);
+        io.to(client.userRoom).emit('leaveMessageGame', { name: client.userName });
     });
+
+
+    // Chat
+    client.on('sendMessageGame', (message) => {
+        io.to(client.userRoom).emit('newMessageGame', { name: client.userName, text: message });
+        console.log(`user ${client.userName} send message: ${message}`);
+    });
+
+
 });
-
-// for(let room of Rooms) {
-//     io.in(room).clients((error, socketIds) => {
-//         if (error) throw error;
-
-//         socketIds.forEach(socketId => io.of('/').adapter.remoteLeave(socketId, room));
-
-//     });
-// }
-
 
 http.listen(port, () => {
     console.log('listening on *:' + port);

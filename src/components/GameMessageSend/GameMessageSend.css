@@ -1,0 +1,30 @@
+.GameMessageSend {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+
+    align-items: center;
+}
+
+.GameMessageSend-Input{
+    box-sizing: border-box;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    width: 100%;
+    padding: 0 10px;
+    line-height: 32px;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 0 4px;
+}
+
+.GameMessageSend-Input:focus {
+    outline: none;
+    border-color: #535196;
+}
+
+.GameMessageSend-Button {
+    border-radius: 0 0 4px 0;
+}

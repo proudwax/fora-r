@@ -1,30 +1,18 @@
 import * as types from './types';
 
 const initialState = {
-    gameID: null,
-    players: [
-        'Player1',
-        'Player2'
-    ],
-    listScore: [
-        [1, 0],
-        [0, 0],
-        [0, 1],
-        [1, 0]
-    ],
-    opponentStatus: 'pending' // pending || done
+    id: null,
+    connected: false
 };
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
-        case types.ADD_SCORE:
-            return { ...state, score: state.score.push(action.payload) };
-        case types.OPPONENT_PENDING:
-            return { ...state, opponentStatus: 'pending' };
-        case types.OPPONENT_DONE:
-            return { ...state, opponentStatus: 'done' };
-        case types.SET_GAME_ID:
-            return { ...state, gameID: action.payload };    
+        case types.SET_ID:
+            return { ...state, id: action.payload };
+        case types.CONNECTED:
+            return { ...state, connected: action.payload };    
+        case types.QUIT:
+            return { ...state, id: action.payload.id, connected: action.payload.connected };
 
         default:
             return state;

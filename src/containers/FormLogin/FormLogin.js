@@ -57,6 +57,7 @@ class FormLogin extends React.Component {
                         <Input type='text'
                             name='Login'
                             size='m'
+                            classes='Input_width_available'
                             autoFocus='true'
                             placeholder='Your nickname'
                             autoComplete='off'

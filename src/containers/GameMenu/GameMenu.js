@@ -47,8 +47,8 @@ class GameMenu extends React.Component {
 
         return (
             <div className='GameMenu'>
-                <div className='GameMenu-Item'><Button color='primary' classes='GameMenu-Button' onClick={this.handleCreate}>Create Game</Button></div>
-                <div className='GameMenu-Item'><Button color='primary' classes='GameMenu-Button'>Connect to Game</Button></div>
+                <div className='GameMenu-Item'><Button size='m' color='primary' classes='GameMenu-Button' onClick={this.handleCreate}>Create Game</Button></div>
+                <div className='GameMenu-Item'><Button size='m' color='primary' classes='GameMenu-Button'>Connect to Game</Button></div>
             </div>
         );
     }

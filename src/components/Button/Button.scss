@@ -1,0 +1,99 @@
+@import '../../theme/test/fonts.scss';
+@import '../../theme/test/colors.scss';
+
+.Button {
+    font-family: inherit;
+    position: relative;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    color: $color-base-base;
+    border: 0;
+    border-radius: 3px;
+    outline: 0;
+    background: $color-bg-selection;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transition: all .25s ease-out;
+
+    &:before {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        bottom: 1px;
+        left: 1px;
+        content: '';
+        border-radius: 2px;
+        background: #fff;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: $color-bg-hover;
+    }
+    
+    &.Button_focused {
+        z-index: 1;
+        background: $color-bg-action;
+    }
+
+    &:before.Button_focused {
+        box-shadow: 0 0 0 1px $color-bg-action, inset 0 0 0 1px $color-bg-action;
+    }
+
+    &.Button_primary {
+        color: $color-bg-default;
+        background: $color-bg-brand;
+
+        &:hover {
+            background: $color-bg-action;
+        }
+
+        &:before {
+            display: none;
+        }
+    }
+
+    &:disabled {
+        background: $color-bg-ghost;
+    }
+
+    &:disabled .Button-Text {
+        color: $color-typo-ghost;
+    }
+
+    @each $size in (s, m, l, xl) {
+        &_size_#{$size} {
+            font-size: map-get($size-typo, $size);
+            line-height: map-get($line-height-typo, $size);
+        }
+        &_size_#{$size} .Button-Text {
+            margin: (round(map-get($line-height-typo, $size) * .25)) (round(map-get($line-height-typo, $size) * .6));
+        }
+    }
+}
+
+.Button-Text {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.Button:focus {
+    box-shadow: 0 1px 1px 0 rgba(60, 64, 67, .08),
+    0 1px 3px 1px rgba(60, 64, 67, .16);
+}
+
+.Button_secondary {
+     color: #fff;
+     background-color: #2196f3;
+}
+
+.Button_secondary:hover {
+    background-color: #1976d2;
+}

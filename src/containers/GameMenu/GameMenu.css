@@ -32,12 +32,11 @@
 .GameMenu-Button {
     width: 40%;
     max-width: 200px;
-    font-size: 17px;
 }
 
-.GameMenu-Button:focus {
+/* .GameMenu-Button:focus {
     outline: none;
     color: #fff;
     background-color: #ffdb4d;
     background-color: #900;
-}
+} */

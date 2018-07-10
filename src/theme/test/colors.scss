@@ -1,8 +1,7 @@
-/* Базовые цвета от которых выстраивается вся политра */
-$color-base-base: #fff; /* hsl(0, 0%, 0%) Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ...*/
-$color-base-essential: #0070f0; /* hsl(0, 0%, 100%) Базовый цвет поверхностей */
-$color-base-project: #fff; /* hsl(211, 100%, 35%) Проектный цвет, от которого выстраивают акцентные состояния */
-$color-base-phantom: #0056b3; /* hsl(40, 14%, 96%) Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
+$color-base-base: #333; /* hsl(0, 0%, 0%) Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ...*/
+$color-base-essential: #333; /* hsl(0, 0%, 100%) Базовый цвет поверхностей */
+$color-base-project: #535196; /* hsl(211, 100%, 35%) Проектный цвет, от которого выстраивают акцентные состояния */
+$color-base-phantom: #000000; /* hsl(40, 14%, 96%) Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
 $color-base-path: #0056b3; /* hsl(220, 100%, 47%) Ссылочный цвет, от которого выстраиваются все их состояния */
 $color-base-success: #00985f; /* Цвет успеха */
 $color-base-alert: #f33; /* Цвет ошибки */
@@ -11,35 +10,35 @@ $color-base-normal: #dde3e5; /* Цвет нейтральный */
 $color-base-system: #778a9b; /* Цвет системнный */
 
 /* Цвета фона */
-$color-bg-brand: $color-base-project; /* Цвет фона брендированый */
-$color-bg-action: color($color-base-project l(+15%)); /* Цвет фона действия */
-$color-bg-selection: color($color-base-project h(-1) l(+31%)); /* Цвет фона выделения */
-$color-bg-hover: color($color-base-base a(15%)); /* Цвет фона при наведении */
-$color-bg-border: color($color-base-phantom a(5%)); /* Цвет границ */
-$color-bg-stripe: color($color-base-phantom a(4%)); /* Цвет зебры */
-$color-bg-ghost: color($color-base-phantom a(8%)); /* Цвет затенения */
-$color-bg-default: $color-base-essential; /* Цвет дефолта */
-$color-bg-tone: color($color-base-phantom a(90%)); /* Цвет паранджи */
-$color-bg-soft: color($color-base-essential a(97%)); /* Цвет молока */
-$color-bg-success: color($color-base-success s(-20%) l(+60%)); /* Цвет фона успеха */
-$color-bg-alert: color($color-base-alert a(10%)); /* Цвет фона ошибки */
-$color-bg-warning: color($color-base-warning a(40%)); /* Цвет фона предупреждения */
-$color-bg-normal: $color-base-normal; /* Цвет фона нейтральный */
-$color-bg-system: $color-base-system; /* Цвет фона системнный */
-$color-bg-link: color($color-base-path h(-7%) s(-13) l(+14) a(40%)); /* Цвет фона ссылки */
+$color-bg-brand: #535196; /* Цвет фона брендированый */
+$color-bg-action: rgb(124, 122, 184); /* Цвет фона действия */
+$color-bg-selection: rgb(176, 175, 212); /* Цвет фона выделения */
+$color-bg-hover: rgba(51, 51, 51, 0.15); /* Цвет фона при наведении */
+$color-bg-border: rgba(0, 0, 0, 0.05);  /* Цвет границ */
+$color-bg-stripe: rgba(0, 0, 0, 0.04); /* Цвет зебры */
+$color-bg-ghost: rgba(0, 0, 0, 0.08); /* Цвет затенения */
+$color-bg-default: #ffffff; /* Цвет дефолта */
+$color-bg-tone: rgba(0, 0, 0, 0.9); /* Цвет паранджи */
+$color-bg-soft: rgba(255, 255, 255, 0.97); /* Цвет молока */
+$color-bg-success: rgb(209, 250, 235); /* Цвет фона успеха */
+$color-bg-alert: rgba(255, 51, 51, 0.1); /* Цвет фона ошибки */
+$color-bg-warning: rgba(255, 153, 0, 0.4); /* Цвет фона предупреждения */
+$color-bg-normal: #dde3e5; /* Цвет фона нейтральный */
+$color-bg-system: #778a9b; /* Цвет фона системнный */
+$color-bg-link: rgba(16, 147, 234, 0.4); /* Цвет фона ссылки */
 
 /* Цвета текста */
-$color-typo-primary: $color-base-base; /* Цвет основного текста */
-$color-typo-promo: color($color-base-base a(80%)); /* Цвет промо текста */
-$color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
-$color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
-$color-typo-disable: color($color-base-base a(30%)); /* Цвет неактивного текста */
-$color-typo-success: $color-base-success; /* Цвет текста успеха */
-$color-typo-warning: $color-base-warning; /* Цвет текста предупреждения */
-$color-typo-alert: $color-base-alert; /* Цвет текста ошибки */
+$color-typo-primary: #333; /* Цвет основного текста */
+$color-typo-promo: rgba(51, 51, 51, 0.8); /* Цвет промо текста */
+$color-typo-secondary: rgba(51, 51, 51, 0.6); /* Цвет второстепенного текста */
+$color-typo-ghost: rgba(51, 51, 51, 0.3); /* Цвет дополнительного текста */
+$color-typo-disable: rgba(51, 51, 51, 0.3); /* Цвет неактивного текста */
+$color-typo-success: #00985f; /* Цвет текста успеха */
+$color-typo-warning: #f90; /* Цвет текста предупреждения */
+$color-typo-alert: #f33; /* Цвет текста ошибки */
 
 /* Цвета ссылок */
-$color-link: $color-base-path; /* Цвет основной ссылки */
-$color-link-external: $color-base-path; /* Цвет дополнительной ссылки */
-$color-link-minor: color($color-base-path h(+22) s(-80%) l(+13%)); /* Цвет второстепенной ссылки */
-$color-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
+$color-link: #0056b3; /* Цвет основной ссылки */
+$color-link-external: #0056b3; /* Цвет дополнительной ссылки */
+$color-link-minor: rgb(98, 104, 147); /* Цвет второстепенной ссылки */
+$color-link-hover: rgb(0, 69, 143); /* Цвет ховера ссылки */

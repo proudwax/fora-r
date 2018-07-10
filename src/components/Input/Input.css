@@ -5,7 +5,6 @@
 /* Межстрочный интервал */
 /* Отступы */
 /* Отступы */
-/* Базовые цвета от которых выстраивается вся политра */
 /* hsl(0, 0%, 0%) Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ...*/
 /* hsl(0, 0%, 100%) Базовый цвет поверхностей */
 /* hsl(211, 100%, 35%) Проектный цвет, от которого выстраивают акцентные состояния */
@@ -52,7 +51,7 @@
   touch-action: manipulation;
   position: relative;
   display: inline-flex;
-  background: color(#0056b3 a(5%));
+  background: rgba(0, 0, 0, 0.05);
   -webkit-tap-highlight-color: transparent; }
   .Input:before {
     position: absolute;
@@ -86,6 +85,8 @@
   .Input_size_xl .Input-Control {
     height: 40px;
     padding: 0 14px; }
+  .Input_width_available {
+    width: 100%; }
 
 .Input-Control {
   font: inherit;
@@ -104,6 +105,6 @@
 .Input_focused {
   z-index: 1; }
   .Input_focused:before {
-    box-shadow: 0 0 0 1px #fc0, inset 0 0 0 1px #fc0; }
+    box-shadow: 0 0 0 1px #7c7ab8, inset 0 0 0 1px #7c7ab8; }
   .Input_focused .Input-Control {
     text-overflow: clip; }

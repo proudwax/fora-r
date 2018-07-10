@@ -36,13 +36,14 @@ class Input extends React.Component {
     }
 
     render() {
-        const { size, ...rest } = this.props;
+        const { size, classes, ...rest } = this.props;
         const { focused } = this.state;
 
         const className = classNames(
             'Input',
             size && `Input_size_${size}`,
-            focused && 'Input_focused'
+            focused && 'Input_focused',
+            classes
         );
 
         return (<div className={className}>

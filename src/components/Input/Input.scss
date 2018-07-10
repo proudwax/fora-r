@@ -1,4 +1,5 @@
 @import '../../theme/test/fonts.scss';
+@import '../../theme/test/colors.scss';
 
 .Input {
     -ms-touch-action: manipulation;
@@ -6,7 +7,8 @@
     
     position: relative;
     display: inline-flex;
-    background: rgba(0, 0, 0, .2);
+    // background: rgba(0, 0, 0, .2);
+    background: $color-bg-border;
     -webkit-tap-highlight-color: transparent;
     
     &:before {

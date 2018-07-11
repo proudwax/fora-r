@@ -10,10 +10,10 @@ import './PageCommonGame.css';
 const PageCommonGame = () => {
     return (<Grid>
         <MenuContainer />
-        <div className='Grid-GameMenu'>
+        <div className='Grid-Main'>
             <GameMenu />
         </div>
-        <div className='Grid-GamesActive'>
+        <div className='Grid-Sidebar'>
             <GamesActive />
         </div>
     </Grid>);

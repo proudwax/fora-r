@@ -9,7 +9,7 @@ import './PageLogin.css';
 const PageLogin = (rest) => {
     return (<Grid>
         <MenuContainer />
-        <div className='Grid-Center'>
+        <div className='Grid-Main'>
             <h1>PageLogin</h1>
             <FormLogin {...rest} />
         </div>

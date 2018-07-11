@@ -41,7 +41,7 @@ class Input extends React.Component {
 
         const className = classNames(
             'Input',
-            size && `Input_size_${size}`,
+            size ? `Input_size_${size}` : 'Input_size_m',
             focused && 'Input_focused',
             classes
         );

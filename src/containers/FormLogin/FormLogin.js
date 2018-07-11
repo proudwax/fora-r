@@ -56,7 +56,7 @@ class FormLogin extends React.Component {
                     <FormField>
                         <Input type='text'
                             name='Login'
-                            size='m'
+                            size='l'
                             classes='Input_width_available'
                             autoFocus='true'
                             placeholder='Your nickname'
@@ -68,6 +68,7 @@ class FormLogin extends React.Component {
                     </FormField>
                     <Button
                         text='Send'
+                        size='l'
                         type='submit'
                         disabled={toggleDisabledButton(nickName)}
                     >Send</Button>

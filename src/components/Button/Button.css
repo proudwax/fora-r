@@ -3,8 +3,6 @@
 /* Размеры текста */
 /* Межстрочный интервал */
 /* Межстрочный интервал */
-/* Отступы */
-/* Отступы */
 /* hsl(0, 0%, 0%) Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ...*/
 /* hsl(0, 0%, 100%) Базовый цвет поверхностей */
 /* hsl(211, 100%, 35%) Проектный цвет, от которого выстраивают акцентные состояния */
@@ -78,8 +76,6 @@
   .Button.Button_focused {
     z-index: 1;
     background: #7c7ab8; }
-  .Button:before.Button_focused {
-    box-shadow: 0 0 0 1px #7c7ab8, inset 0 0 0 1px #7c7ab8; }
   .Button.Button_primary {
     color: #ffffff;
     background: #535196; }
@@ -87,7 +83,19 @@
       background: #7c7ab8; }
     .Button.Button_primary:before {
       display: none; }
+    .Button.Button_primary.Button_focused {
+      animation: button-primary-focus 0.5s infinite linear alternate; }
+  .Button.Button_secondary {
+    color: #ffffff;
+    background-color: #900; }
+    .Button.Button_secondary:hover {
+      background-color: #750000; }
+    .Button.Button_secondary:before {
+      display: none; }
+    .Button.Button_secondary.Button_focused {
+      animation: button-secondary-focus 0.5s infinite linear alternate; }
   .Button:disabled {
+    cursor: default;
     background: rgba(0, 0, 0, 0.08); }
   .Button:disabled .Button-Text {
     color: rgba(51, 51, 51, 0.3); }
@@ -112,6 +120,9 @@
   .Button_size_xl .Button-Text {
     margin: 7px 17px; }
 
+.Button_focused.Button:before {
+  box-shadow: 0 0 0 1px #7c7ab8, inset 0 0 0 1px #7c7ab8; }
+
 .Button-Text {
   position: relative;
   display: inline-block;
@@ -119,12 +130,14 @@
   text-overflow: ellipsis;
   vertical-align: top; }
 
-.Button:focus {
-  box-shadow: 0 1px 1px 0 rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.16); }
+@keyframes button-primary-focus {
+  from {
+    background-color: #7c7ab8; }
+  to {
+    background-color: #535196; } }
 
-.Button_secondary {
-  color: #fff;
-  background-color: #2196f3; }
-
-.Button_secondary:hover {
-  background-color: #1976d2; }
+@keyframes button-secondary-focus {
+  from {
+    background-color: #900; }
+  to {
+    background-color: #750000; } }

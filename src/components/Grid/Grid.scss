@@ -1,0 +1,68 @@
+@import '../../theme/test/screens.scss';
+
+.Grid {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "header" "nav" "main" "sidebar" "footer";
+    padding-left: 10px;
+    padding-right: 10px;
+    grid-row-gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.Grid-Header {
+    grid-area: header;
+}
+
+.Grid-Nav {
+    grid-area: nav;
+}
+
+.Grid-Sidebar {
+    grid-area: sidebar;
+}
+
+.Grid-Main {
+   grid-area: main;
+}
+
+.Grid-Content {
+    grid-area: main / main / main / 5;
+}
+
+@media (min-width: $screen-xs) {
+    .Grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: "header header header" "nav main main" "sidebar main main" "footer footer footer";
+        grid-column-gap: 10px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: $screen-s) {
+    .Grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-areas: "header header header header" "nav main main sidebar" "footer footer footer footer";
+        grid-column-gap: 10px;
+        margin: 0 auto;
+    }
+
+    .Grid-GameMenu {
+        grid-row: 2/2;
+        grid-column: 2/4;
+    }
+
+    .Grid-Center {
+        grid-row: 2/2;
+        grid-column: 2/4;
+    }
+
+    .Grid-GamesActive {
+        grid-row: 2/2;
+        grid-column: 4/5;
+    }
+}

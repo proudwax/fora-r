@@ -13,20 +13,20 @@ class Button extends React.Component  {
 
         this._button = React.createRef();
 
-        this.focus = this.focus.bind(this);
-        this.focusIn = this.focusIn.bind(this);
-        this.focusOut = this.focusOut.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.handleFocusIn = this.handleFocusIn.bind(this);
+        this.handleFocusOut = this.handleFocusOut.bind(this);
     }
 
-    focusIn() {
+    handleFocusIn() {
         this.setState({ focused: true });
     }
 
-    focusOut() {
+    handleFocusOut() {
         this.setState({ focused: false });
     }
 
-    focus() {
+    handleFocus() {
         this.setState({ focused: true });
         this._button.focus();
     }
@@ -38,15 +38,15 @@ class Button extends React.Component  {
         const className = classNames(
                 'Button',
                 size ? `Button_size_${size}` : 'Button_size_m',
-                color && `Button_${color}`,
-                focused && 'Button_focused',
+                !disabled && color && `Button_${color}`,
+                !disabled && focused && 'Button_focused',
                 classes
             );
 
         return (<button 
             ref={node => (this._button = node)} 
-            onFocus={this.focusIn} 
-            onBlur={this.focusOut} 
+            onFocus={this.handleFocusIn} 
+            onBlur={this.handleFocusOut} 
             className={className} 
             {...rest} 
             disabled={disabled}>

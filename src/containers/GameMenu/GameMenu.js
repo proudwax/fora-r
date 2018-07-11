@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { gameSelectors, gameActions } from '../../store/game';
-import { userSelectors } from '../../store/user';
 
 import Spinner from '../../components/Spinner/Spinner';
 import Button from '../../components/Button/Button';
@@ -47,8 +46,8 @@ class GameMenu extends React.Component {
 
         return (
             <div className='GameMenu'>
-                <div className='GameMenu-Item'><Button size='m' color='primary' classes='GameMenu-Button' onClick={this.handleCreate}>Create Game</Button></div>
-                <div className='GameMenu-Item'><Button size='m' color='primary' classes='GameMenu-Button'>Connect to Game</Button></div>
+                <div className='GameMenu-Item'><Button size='l' color='primary' classes='GameMenu-Button' onClick={this.handleCreate}>Create Game</Button></div>
+                <div className='GameMenu-Item'><Button size='l' color='secondary' classes='GameMenu-Button'>Connect to Game</Button></div>
             </div>
         );
     }

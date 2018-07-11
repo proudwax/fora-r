@@ -1,3 +1,6 @@
+@import './theme/test/fonts.scss';
+@import './theme/test/colors.scss';
+
 body {
   margin: 0;
   padding: 0;
@@ -10,5 +13,7 @@ body {
   "Lucida Grande",
   sans-serif;
   font-weight: 400;
+  font-size: $size-typo-m;
+  color: $color-base-base;
   background-color: #f3f1ed;
 }

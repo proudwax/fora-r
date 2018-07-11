@@ -10,7 +10,7 @@ class MenuContainer extends React.Component {
             { path: '/login', text: 'Login' }
         ];
 
-        return (<div className='Grid-Sidebar'><Menu items={items}/></div>);
+        return (<div className='Grid-Nav'><Menu items={items}/></div>);
     }
 }
 

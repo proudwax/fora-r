@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
 
 import './GameMessageSend.css';
 
@@ -37,10 +38,11 @@ class GameMessageSend extends React.Component {
         const { handleSubmit, handleChange, handleDisabled } = this;
 
         return (<form className='GameMessageSend' onSubmit={handleSubmit}>
-            <input
-                className='GameMessageSend-Input'
+            <Input
                 autoComplete='off'
                 type='text'
+                autoFocus='false'
+                classes='Input_width_available'
                 name='Message'
                 placeholder='Enter your message'
                 value={value} 

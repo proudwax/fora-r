@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Button from '../../components/Button/Button';
 import GameChoiseCard from '../../components/GameChoiseCard/GameChoiseCard';
@@ -7,6 +8,16 @@ import Rules from '../../modules/Game/gameData';
 
 import './GameChoise.css';
 
+const Circle = styled.div`
+    position: absolute;
+    left: calc(50% + ${props => x(100)(props.angle)}px);
+    top: calc(50% + ${props => y(100)(props.angle)}px);
+    transform: translate(-50%, -50%);
+`;
+
+const angle = (count) => (index) => 2 / count * index * Math.PI;
+const x = (radius) => (angle) => radius * Math.cos(angle).toFixed(2);
+const y = (radius) => (angle) => radius * Math.sin(angle).toFixed(2);
 
 class GameChoise extends React.Component {
     constructor(props) {
@@ -19,13 +30,15 @@ class GameChoise extends React.Component {
 
     // создаем input radio из array
     createRadioInputs = (radioInputs) => (onChange) => {
-        return radioInputs.map((item, index) => <div key={index} className='GameChoise-Item'>
-            <GameChoiseCard 
-                name={item.name} 
+        const count = angle(radioInputs.length);
+
+        return radioInputs.map((item, index) => <Circle angle={count(index)} key={index} className='GameChoise-Item'>
+            <GameChoiseCard
+                name={item.name}
                 url={item.url}
                 onChange={onChange}
             />
-        </div>);
+        </Circle>);
     }
 
     handleChange(e) {
@@ -42,7 +55,9 @@ class GameChoise extends React.Component {
     render() {
         return (<div className='GameChoise'>
             <form onSubmit={this.handleSubmit}>
-                {this.createRadioInputs(Rules)(this.handleChange) }
+                <div className='GameChoise-List'>
+                    {this.createRadioInputs(Rules)(this.handleChange)}
+                </div>
                 <Button size='l' color='primary' type='submit'>Send</Button>
             </form>
         </div>);

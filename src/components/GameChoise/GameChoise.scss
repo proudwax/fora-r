@@ -14,7 +14,14 @@
     font-size: $size-typo-l;
     color: $color-base-base;
 
+    &-List {
+        position: relative;
+        width: 100%;
+        height: 300px;
+    }
+
     &-Item {
-        margin: $space-m;
+        width: 100px;
+        height: 100px;
     }
 }

@@ -59,8 +59,13 @@
   color: #333; }
   .GameChoise-List {
     position: relative;
-    width: 100%;
-    height: 300px; }
+    width: 100%; }
+    .GameChoise-List:before {
+      content: '';
+      display: block;
+      padding-top: 100%; }
   .GameChoise-Item {
-    width: 100px;
-    height: 100px; }
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%; }

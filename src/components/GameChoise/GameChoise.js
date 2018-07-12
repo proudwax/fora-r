@@ -9,13 +9,14 @@ import Rules from '../../modules/Game/gameData';
 import './GameChoise.css';
 
 const Circle = styled.div`
-    position: absolute;
-    left: calc(50% + ${props => x(100)(props.angle)}px);
-    top: calc(50% + ${props => y(100)(props.angle)}px);
-    transform: translate(-50%, -50%);
+    left: calc(50% + ${props => x(30)(props.angle)}%);
+    top: calc(50% + ${props => y(30)(props.angle)}%);
 `;
 
-const angle = (count) => (index) => 2 / count * index * Math.PI;
+// 360 / count * index / 180 * Math.PI => 1deg = (PI / 180)rad 
+// const angle = (count) => (index) => 2 / count * index * Math.PI; 
+const angle = (count) => (index) => (360 / count * index - 90) / 180 * Math.PI; // Поворачиваем точку отсчёта.
+
 const x = (radius) => (angle) => radius * Math.cos(angle).toFixed(2);
 const y = (radius) => (angle) => radius * Math.sin(angle).toFixed(2);
 
@@ -34,6 +35,7 @@ class GameChoise extends React.Component {
 
         return radioInputs.map((item, index) => <Circle angle={count(index)} key={index} className='GameChoise-Item'>
             <GameChoiseCard
+                index={index}
                 name={item.name}
                 url={item.url}
                 onChange={onChange}

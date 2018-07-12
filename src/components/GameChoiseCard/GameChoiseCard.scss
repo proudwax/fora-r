@@ -14,20 +14,75 @@
     0px 2px 1px -1px rgba(0, 0, 0, 0.12);
     overflow: hidden;
 
-    &-Imput {
-        display: none;
-    }
-
-    &-Conetnt {
-        display: flex;
-        flex-direction: column;
-    }
-
-    &-Media {
-
-    }
+    transition: all .25s ease-out;
 
     &-Image {
         max-width: 100%;
+    }
+
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+
+    [type="radio"]:checked+label,
+    [type="radio"]:not(:checked)+label {
+        position: relative;
+        cursor: pointer;
+    }
+
+    [type="radio"]:checked+label:before,
+    [type="radio"]:not(:checked)+label:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 4px solid transparent;
+        transform: translateZ(0);
+        will-change: opacity;
+    }
+
+    [type="radio"]:checked+label:after,
+    [type="radio"]:not(:checked)+label:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $color-bg-action;
+        transform: translateZ(0);
+        will-change: opacity;
+        transition: all 0.25s ease;
+    }
+
+    [type="radio"]:not(:checked)+label:after {
+        opacity: 0;
+    }
+
+    [type="radio"]:not(:checked)+label:hover:after {
+        opacity: .75;
+        background-color: $color-bg-brand;
+    }
+
+    [type="radio"]:focus+label:after { 
+        opacity: .75;
+        animation: gamechoisecard-focus 0.5s infinite linear alternate;
+    }
+
+    [type="radio"]:checked+label:after {
+        opacity: .75;
+    }
+}
+
+@keyframes gamechoisecard-focus {
+    from {
+        background-color: $color-bg-action;
+    }
+    to {
+        background-color: $color-bg-brand;
     }
 }

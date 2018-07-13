@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MenuContainer from '../../containers/MenuContainer/MenuContainer';
-import Grid from '../Grid/Grid';
+import Grid from '../../components/Grid/Grid';
 import GameMenu from '../../containers/GameMenu/GameMenu';
 import GamesActive from '../../containers/GamesActive/GamesActive';
 

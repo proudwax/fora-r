@@ -28,11 +28,19 @@ class Button extends React.Component  {
 
     handleFocus() {
         this.setState({ focused: true });
-        this._button.focus();
+        this.props.ref.focus();
     }
     
+    componentDidMount() {
+        const { node } = this.props;
+
+        if (node) {
+            node(this._button);
+        }
+    }
+
     render() {
-        const { classes, color, size, disabled, ...rest } = this.props;
+        const { classes, color, size, disabled, node, ...rest } = this.props;
         const { focused } = this.state;
 
         const className = classNames(
@@ -44,7 +52,7 @@ class Button extends React.Component  {
             );
 
         return (<button 
-            ref={node => (this._button = node)} 
+            ref={node => this._button = node}
             onFocus={this.handleFocusIn} 
             onBlur={this.handleFocusOut} 
             className={className} 

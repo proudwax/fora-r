@@ -3,7 +3,7 @@ import * as types from './types';
 const initialState = {
     pointOfEnter: '',
     nickName: '',
-    role: 'viewer'
+    role: ''
 };
 
 export default function reduce(state = initialState, action = {}) {
@@ -11,7 +11,7 @@ export default function reduce(state = initialState, action = {}) {
         case types.SET_NICKNAME:
             return { ...state, nickName: action.payload };
         case types.SET_ROLE:
-            return { ...state, role: action.payload };
+            return { ...state, role: action.payload };  
 
         default:
             return state;

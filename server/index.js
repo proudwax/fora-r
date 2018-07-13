@@ -16,6 +16,7 @@ let roomID = null;
 
 io.on('connection', (client) => {
     let addedUser = false;
+    let roundTime = 30;
 
     client.on('addUser', (userName) => {
         if (addedUser) return;
@@ -26,14 +27,22 @@ io.on('connection', (client) => {
         console.log(`user ${client.userName} is connected`);
     });
 
+    client.on('setUserRole', (role) => {
+        client.userRole = role;
+        client.emit('sendUserRole', client.userRole);
+    });
+
     client.on('createGame', () => {
 
         clientURL = url.parse(client.handshake.headers.referer).pathname;
         room = new Room(clientURL);
         roomID = room.getID();
+        client.userRole = 'admin';
+        client.userRoom = roomID;
 
         console.log('create game ID ', roomID);
         client.emit('createdGameID', roomID);
+        client.emit('sendUserRole', client.userRole);
 
         // if (Rooms.indexOf(roomID) === -1) {
         //     Rooms.push(roomID);
@@ -104,7 +113,12 @@ io.on('connection', (client) => {
     });
 
     // Round
-    client.on('startRound', (roundTime = 30) => {
+    client.on('roundNewTime', (time) => {
+        roundTime = time;
+        io.to(client.userRoom).emit('roundSetNewTime', roundTime);
+    });
+
+    client.on('startRound', () => {
         client.gameRound = setInterval(() => {
             let tick = 0;
             io.to(client.userRoom).emit('roundTick', tick++);

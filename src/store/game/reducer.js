@@ -2,7 +2,7 @@ import * as types from './types';
 
 const initialState = {
     id: null,
-    connected: false
+    connected: false,
 };
 
 export default function reduce(state = initialState, action = {}) {
@@ -10,7 +10,7 @@ export default function reduce(state = initialState, action = {}) {
         case types.SET_ID:
             return { ...state, id: action.payload };
         case types.CONNECTED:
-            return { ...state, connected: action.payload };    
+            return { ...state, connected: action.payload };      
         case types.QUIT:
             return { ...state, id: action.payload.id, connected: action.payload.connected };
 

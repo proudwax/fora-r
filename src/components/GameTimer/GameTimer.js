@@ -4,49 +4,46 @@ import styled from 'styled-components';
 import './GameTimer.css';
 
 const Line = styled.span`
-    width: ${props => { return (props.timePassed / props.roundTime * 100).toFixed(2); } }%;
+    width: ${props => { return (props.timePassed / props.roundTime * 100).toFixed(2); }}%;
 `;
 
 class GameTimer extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             tick: 0
         };
-        
+
         this.handleStartTimer = this.handleStartTimer.bind(this);
+        this.handleStopTimer = this.handleStopTimer.bind(this);
         this.handleRestartTimer = this.handleRestartTimer.bind(this);
     }
-    
-    handleStartTimer() { 
-        console.log(this.props.roundTime);
-        
+
+    handleStartTimer() {
         this.timer = setInterval(() => {
             this.setState(prevState => { return { ...prevState, tick: prevState.tick + 1 } });
         }, 1000);
-        
+
         setTimeout(() => {
             clearInterval(this.timer);
         }, this.props.roundTime * 1000);
-    }   
-    
+    }
+
     handleRestartTimer() {
         clearInterval(this.timer);
-        
+
         this.handleStartTimer();
     }
 
-    componentWillMount(){
-        if (!this.props.roundTime) {
-            this.props = { ...this.props, roundTime: 10 };
-        }
+    handleStopTimer() {
+        clearTimeout(this.timer);
     }
-    
+
     componentDidMount() {
         this.handleStartTimer();
     }
-    
+
     componentWillUnmount() {
         clearTimeout(this.timer);
     }
@@ -57,5 +54,9 @@ class GameTimer extends React.Component {
         </div>);
     }
 }
+
+GameTimer.defaultProps = {
+    roundTime: 10
+};
 
 export default GameTimer;

@@ -103,6 +103,23 @@ io.on('connection', (client) => {
         console.log(`user ${client.userName} send message: ${message}`);
     });
 
+    // Round
+    client.on('startRound', (roundTime = 30) => {
+        client.gameRound = setInterval(() => {
+            let tick = 0;
+            io.to(client.userRoom).emit('roundTick', tick++);
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(client.gameRound);
+            io.to(client.userRoom).emit('roundEnd');
+        }, roundTime);
+    });
+
+    client.on('stopRound', () => {
+        clearInterval(client.gameRound);
+        io.to(client.userRoom).emit('roundEnd');
+    });
 
 });
 

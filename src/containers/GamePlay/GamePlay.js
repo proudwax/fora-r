@@ -8,11 +8,11 @@ import './GamePlay.css';
 
 const GamePlay = () => {
     return (<div className='GamePlay'>
-            <GameScore me='1' opponent='0'/>
-            <GameChoise/>
-            <div>Opponent</div>
-            <GameTimer roundTime1={30}/>
-        </div>); 
+        <GameScore me='1' opponent='0' />
+        <GameChoise />
+        <div>Opponent</div>
+        <GameTimer roundTime={30} />
+    </div>);
 }
 
 export default GamePlay;

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import './Button.css';
 
-class Button extends React.Component  {
+class Button extends React.Component {
     constructor(props) {
         super(props);
 
@@ -30,7 +30,7 @@ class Button extends React.Component  {
         this.setState({ focused: true });
         this.props.ref.focus();
     }
-    
+
     componentDidMount() {
         const { node } = this.props;
 
@@ -44,26 +44,27 @@ class Button extends React.Component  {
         const { focused } = this.state;
 
         const className = classNames(
-                'Button',
-                size ? `Button_size_${size}` : 'Button_size_m',
-                !disabled && color && `Button_${color}`,
-                !disabled && focused && 'Button_focused',
-                classes
-            );
-
-        return (<button 
-            ref={node => this._button = node}
-            onFocus={this.handleFocusIn} 
-            onBlur={this.handleFocusOut} 
-            className={className} 
-            {...rest} 
-            disabled={disabled}>
-                <span className='Button-Text'>
-                    {this.props.children}
-                </span>
-            </button>
+            'Button',
+            size ? `Button_size_${size}` : 'Button_size_m',
+            !disabled && color && `Button_${color}`,
+            !disabled && focused && 'Button_focused',
+            classes
         );
-    }   
+
+        return (<button
+            ref={node => this._button = node}
+            onFocus={this.handleFocusIn}
+            onBlur={this.handleFocusOut}
+            onMouseUp={this.handleFocusOut}
+            className={className}
+            {...rest}
+            disabled={disabled}>
+            <span className='Button-Text'>
+                {this.props.children}
+            </span>
+        </button>
+        );
+    }
 }
 
 export default Button;

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -8,7 +8,9 @@ import { userSelectors, userActions } from '../../store/user';
 
 import Spinner from '../../components/Spinner/Spinner';
 import Button from '../../components/Button/Button';
-import Modal from '../../components/Modal/Modal'; 
+import Modal from '../../components/Modal/Modal';
+import GameButtonConnect from '../../containers/GameButtonConnect';
+
 import './GameMenu.css';
 
 class GameMenu extends React.Component {
@@ -17,33 +19,11 @@ class GameMenu extends React.Component {
 
         this.state = {
             status: '',
-            modalVisible: false
+            visible: false
         };
 
         this.handleCreate = this.handleCreate.bind(this);
         this.handleShowModal = this.handleShowModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-        this.handleOutsideModalClick = this.handleOutsideModalClick.bind(this);
-    }
-
-    handleShowModal() {
-        document.addEventListener('click', this.handleOutsideModalClick, false);
-
-        this.setState({ modalVisible: true });
-    }
-
-    handleCloseModal() {
-        document.removeEventListener('click', this.handleOutsideModalClick, false);
-
-        this.setState({ modalVisible: false });
-    }
-
-    handleOutsideModalClick(e) {
-        if (this.containerModal.contains(e.target)) {
-            return;
-        }
-
-        this.handleCloseModal();
     }
 
     handleCreate() {
@@ -53,6 +33,12 @@ class GameMenu extends React.Component {
 
         this.props.onGetRole();
         this.props.onCreate();
+    }
+
+    handleShowModal() {
+        this.setState({
+            visible: true
+        });
     }
 
     render() {
@@ -73,23 +59,18 @@ class GameMenu extends React.Component {
         return (
             <div className='GameMenu' >
                 <div className='GameMenu-Item'>
-                    <Button 
-                        size='l' 
-                        color='primary' 
-                        classes='GameMenu-Button' 
+                    <Button
+                        size='l'
+                        color='primary'
+                        classes='GameMenu-Button'
                         onClick={this.handleCreate}>
                         Create Game
                     </Button>
                 </div>
                 <div className='GameMenu-Item'>
-                    <Button 
-                        size='l'
-                        color='secondary' 
-                        classes='GameMenu-Button' 
-                        onClick={this.handleShowModal}>
-                        Connect to Game
-                    </Button>
-                    {this.state.modalVisible && <Modal nodeContainer={(node) => this.containerModal = node} onCloseModal={this.handleCloseModal}><h1>List of active game</h1></Modal>}
+                    <GameButtonConnect>
+                        test
+                    </GameButtonConnect>
                 </div>
             </div>
         );

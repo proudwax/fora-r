@@ -1,36 +1,72 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-import Button from '../../components/Button/Button';
-
-import './Modal.css';
+import ModalBase from './ModalBase';
 
 class Modal extends React.Component {
+    static getDerivedStateFromProps(nextProps) {
+        if (nextProps.isVisible) {
+            return {
+                isVisible: true,
+            };
+        } else {
+            return {
+                isVisible: false,
+            };
+        }
+
+        return null;
+    }
+
     constructor(props) {
         super(props);
 
-        this._modal = document.createElement('div');
+        this.state = {
+            isVisible: props.isVisible
+        }
+
+        this.handleShowModal = this.handleShowModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleOutsideModalClick = this.handleOutsideModalClick.bind(this);
     }
 
-    componentWillMount() {
-        document.body.appendChild(this._modal);
+    handleShowModal() {
+        document.addEventListener('click', this.handleOutsideModalClick, false);
     }
-    componentWillUnmount() {
-        document.body.removeChild(this._modal);
+
+    handleCloseModal() {
+        document.removeEventListener('click', this.handleOutsideModalClick, false);
+
+        this.setState({ isVisible: false });
+    }
+
+    handleOutsideModalClick(e) {
+        if (this._content.contains(e.target)) {
+            return;
+        }
+
+        this.handleCloseModal();
     }
 
     render() {
-        return ReactDOM.createPortal(<div className='Modal'>
-                <div className='Modal-Table'>
-                    <div className='Modal-Cell'>
-                        <div ref={this.props.nodeContainer} className='Modal-Content'>
-                            <Button onClick={this.props.onCloseModal}>Close</Button>
-                            {this.props.children}
-                        </div>
-                    </div>
-                </div>
-            </div>, this._modal);
+        const { isVisible } = this.state;
+
+        if (isVisible) {
+            this.handleShowModal();
+
+            return (
+                <ModalBase
+                    modalContent={(node) => this._content = node}
+                    onClose={this.handleCloseModal}
+                >
+                    {this.props.children}
+                </ModalBase>);
+        }
+        return null;
     }
 }
+
+Modal.defaultProps = {
+    isVisible: false
+};
 
 export default Modal;

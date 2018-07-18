@@ -8,7 +8,7 @@ class ModalBase extends React.Component {
         super(props);
 
         this._modal = document.createElement('div');
-        this._modal.classList.add('Modal');
+        this._modal.classList.add('Modal', 'Modal_visible');
     }
 
     componentWillMount() {

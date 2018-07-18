@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 
-import './GameButtonConnect.css';
+// import './GameButtonConsnect.css';
 
 class GameButtonConnect extends React.Component {
     constructor(props) {

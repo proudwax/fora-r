@@ -13,9 +13,16 @@ class Button extends React.Component {
 
         this._button = React.createRef();
 
+        this.handleClick = this.handleClick.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleFocusIn = this.handleFocusIn.bind(this);
         this.handleFocusOut = this.handleFocusOut.bind(this);
+    }
+
+    handleClick(e) {
+        this.props.onClick && this.props.onClick(e);
+
+        this.handleFocusOut();
     }
 
     handleFocusIn() {
@@ -40,7 +47,7 @@ class Button extends React.Component {
     }
 
     render() {
-        const { classes, color, size, disabled, node, ...rest } = this.props;
+        const { classes, color, size, disabled, children } = this.props;
         const { focused } = this.state;
 
         const className = classNames(
@@ -55,12 +62,12 @@ class Button extends React.Component {
             ref={node => this._button = node}
             onFocus={this.handleFocusIn}
             onBlur={this.handleFocusOut}
-            onMouseUp={this.handleFocusOut}
+            onClick={(e) => {this.handleClick(e)}}
             className={className}
-            {...rest}
-            disabled={disabled}>
+            disabled={disabled}
+            >
             <span className='Button-Text'>
-                {this.props.children}
+                {children}
             </span>
         </button>
         );
@@ -68,3 +75,5 @@ class Button extends React.Component {
 }
 
 export default Button;
+
+// onMouseUp = { this.handleFocusOut }

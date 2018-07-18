@@ -13,8 +13,6 @@ class Modal extends React.Component {
                 isVisible: false,
             };
         }
-
-        return null;
     }
 
     constructor(props) {

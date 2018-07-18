@@ -1,10 +1,9 @@
-@import '../../../theme/test/colors.scss';
+@import '../../theme/test/colors.scss';
 
 .Modal {
     display: block;
     visibility: visible;
     margin: 0;
-    /* to prevent clickability and visiblity of internal elements with visiblity: visible */
 
     position: fixed;
     top: 0;
@@ -16,7 +15,12 @@
     -webkit-overflow-scrolling: touch;
 
     background: $color-typo-ghost;
-    animation-name: ModalVisible;
+    animation-name: Modal;
+    
+    &_visible {
+        visibility: visible;
+        animation-name: ModalVisible;
+    }
 
     &-Table {
         display: table;
@@ -47,7 +51,22 @@
         animation-fill-mode: forwards;
         animation-timing-function: ease-out;
         
+        animation-name: ModalContent;
+    }
+    
+    &_visible &-Content {
         animation-name: ModalContentVisible;
+    }
+}
+
+@keyframes Modal {
+    0% {
+        visibility: visible;
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
     }
 }
 
@@ -57,6 +76,15 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes ModalContent {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.5);
     }
 }
 

@@ -8,7 +8,6 @@ import { userSelectors, userActions } from '../../store/user';
 
 import Spinner from '../../components/Spinner/Spinner';
 import Button from '../../components/Button/Button';
-import Modal from '../../components/Modal/Modal';
 import GameButtonConnect from '../../containers/GameButtonConnect';
 
 import './GameMenu.css';
@@ -18,12 +17,10 @@ class GameMenu extends React.Component {
         super(props);
 
         this.state = {
-            status: '',
-            visible: false
+            status: ''
         };
 
         this.handleCreate = this.handleCreate.bind(this);
-        this.handleShowModal = this.handleShowModal.bind(this);
     }
 
     handleCreate() {
@@ -33,12 +30,6 @@ class GameMenu extends React.Component {
 
         this.props.onGetRole();
         this.props.onCreate();
-    }
-
-    handleShowModal() {
-        this.setState({
-            visible: true
-        });
     }
 
     render() {

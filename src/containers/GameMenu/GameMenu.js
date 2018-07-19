@@ -60,7 +60,7 @@ class GameMenu extends React.Component {
                 </div>
                 <div className='GameMenu-Item'>
                     <GameButtonConnect>
-                        test
+                        <p>test</p>
                     </GameButtonConnect>
                 </div>
             </div>

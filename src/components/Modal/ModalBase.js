@@ -8,7 +8,7 @@ class ModalBase extends React.Component {
         super(props);
 
         this._modal = document.createElement('div');
-        this._modal.classList.add('Modal', 'Modal_visible');
+        this._modal.classList.add('Modal');
     }
 
     componentWillMount() {
@@ -21,7 +21,7 @@ class ModalBase extends React.Component {
     render() {
         return ReactDOM.createPortal(<div className='Modal-Table'>
             <div className='Modal-Cell'>
-                <div ref={this.props.modalContent} className='Modal-Content'>
+                <div ref={this.props.modalContent} role='document' tabIndex='-1' className='Modal-Content'>
                     {this.props.children}
                 </div>
             </div>

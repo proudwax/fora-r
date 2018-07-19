@@ -1,4 +1,5 @@
 import React from 'react';
+import keycode from 'keycode';
 
 import ModalBase from './ModalBase';
 
@@ -25,20 +26,31 @@ class Modal extends React.Component {
         this.handleShowModal = this.handleShowModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleOutsideModalClick = this.handleOutsideModalClick.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
 
     handleShowModal() {
         document.addEventListener('click', this.handleOutsideModalClick, false);
+        document.addEventListener('keydown', this.handleKeyDown, false);
     }
 
     handleCloseModal() {
         document.removeEventListener('click', this.handleOutsideModalClick, false);
+        document.removeEventListener('keydown', this.handleKeyDown, false);
 
-        this.setState({ isVisible: false });
+        this.props.onClose();
     }
 
     handleOutsideModalClick(e) {
         if (this._content.contains(e.target)) {
+            return;
+        }
+
+        this.handleCloseModal();
+    }
+
+    handleKeyDown(e) {
+        if (keycode(e) !== 'esc') {
             return;
         }
 

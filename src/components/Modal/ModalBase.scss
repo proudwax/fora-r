@@ -15,7 +15,8 @@
     -webkit-overflow-scrolling: touch;
 
     background: $color-typo-ghost;
-    animation-name: Modal;
+    // animation-name: Modal;
+    animation-name: ModalVisible;
     
     &_visible {
         visibility: visible;
@@ -51,7 +52,8 @@
         animation-fill-mode: forwards;
         animation-timing-function: ease-out;
         
-        animation-name: ModalContent;
+        // animation-name: ModalContent;
+        animation-name: ModalContentVisible;
     }
     
     &_visible &-Content {

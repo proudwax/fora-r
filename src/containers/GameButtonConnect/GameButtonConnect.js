@@ -13,8 +13,8 @@ class GameButtonConnect extends React.Component {
             modalVisible: false
         }
 
-        this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
     handleOpenModal() {
@@ -24,7 +24,7 @@ class GameButtonConnect extends React.Component {
     }
 
     handleCloseModal() {
-        this.modalVisible({
+        this.setState({
             modalVisible: false
         })
     }
@@ -42,7 +42,7 @@ class GameButtonConnect extends React.Component {
                     onClick={handleOpenModal}>
                     Connect to Game
                 </Button>
-                <Modal onClose={handleCloseModal} isVisible={this.state.modalVisible}>
+                <Modal onClose={(e) => handleCloseModal(e)} isVisible={this.state.modalVisible}>
                     {children}
                 </Modal>
             </Fragment>
